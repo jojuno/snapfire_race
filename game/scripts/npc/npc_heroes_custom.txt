@@ -1,0 +1,169 @@
+"DOTAHeroes"
+{
+
+  "npc_dota_hero_snapfire"
+	{
+		"Model"					"models/heroes/snapfire/snapfire.vmdl"
+		"IdleExpression"		"scenes/snapfire/snapfire_portrait_idle.vcd"
+		"SoundSet"				"Hero_Snapfire"
+		"Enabled"				"1"
+		"CMEnabled"				"1"
+		"HeroUnlockOrder"		"3"
+		"Role"					"Support,Nuker,Disabler,Escape"
+		"Rolelevels"			"1,3,1,1"
+		"Complexity"			"1"
+		"Team"					"Good"
+		"HeroID"				"128"
+		"ModelScale"			"0.58"
+		"LoadoutScale"			"0.60"
+		"VersusScale"		    "0.60"
+		"SpectatorLoadoutScale" "0.75"
+		"HeroGlowColor"			"242 200 198"
+		"NameAliases"			"snap,mortimer"
+		"PickSound"				"snapfire_snapfire_spawn_25"
+		"BanSound"				"snapfire_snapfire_curse_07"
+		"workshop_guide_name"	"Snapfire"
+		"LastHitChallengeRival"	"npc_dota_hero_kunkka"
+		"HeroSelectSoundEffect"	"Hero_Snapfire.Pick"
+		"GibType"				"default"
+		"Ability1"				"snapfire_scatterblast"
+		"Ability2"				"snapfire_firesnap_cookie"
+		"Ability3"				"snapfire_lil_shredder"
+		"Ability4"				"snapfire_gobble_up"
+		"Ability5"				"snapfire_spit_creep"
+		"Ability6"				"snapfire_mortimer_kisses"
+		"Ability10"				"special_bonus_hp_200"
+		"Ability11"				"special_bonus_movement_speed_15"
+		"Ability12"				"special_bonus_unique_snapfire_5"
+		"Ability13"				"special_bonus_unique_snapfire_7"
+		"Ability14"				"special_bonus_unique_snapfire_6"
+		"Ability15"				"special_bonus_unique_snapfire_4"
+		"Ability16"				"special_bonus_unique_snapfire_3"
+		"Ability17"				"special_bonus_unique_snapfire_1"
+		"AbilityDraftAbilities"
+		{
+			"Ability1"				"snapfire_scatterblast"
+			"Ability2"				"snapfire_firesnap_cookie"
+			"Ability3"				"snapfire_lil_shredder"
+			"Ability4"				"snapfire_mortimer_kisses"
+		}		
+		"ArmorPhysical"				"0"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"50"
+		"AttackDamageMax"			"60"
+		"AttackRate"				"1.600000"
+		"AttackAnimationPoint"		"0.350000"
+		"AttackSpeedActivityModifiers"
+		{
+			"fast"		"170"
+			"faster"	"320"
+		}
+		"AttackAcquisitionRange"	"800"
+		"AttackRange"				"500"
+		"ProjectileModel"			"particles/units/heroes/hero_snapfire/hero_snapfire_base_attack.vpcf"
+		"ProjectileSpeed"			"1800"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"150"
+		"AttributeStrengthGain"		"10"
+		"AttributeBaseIntelligence"	"100"
+		"AttributeIntelligenceGain"	"10"
+		"AttributeBaseAgility"		"16"
+		"AttributeAgilityGain"		"1.9"
+		"MovementSpeed"				"400"
+		"MovementTurnRate"			"0.500000"
+		"MovementSpeedActivityModifiers"
+		{
+			"walk"		"0"
+			"run"		"350"
+			"run_fast"	"440"
+			"run_haste"	"540"
+		}
+		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
+		"HealthBarOffset"			"220"
+
+		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_snapfire.vsndevts"
+		"VoiceFile"					"soundevents/voscripts/game_sounds_vo_snapfire.vsndevts"
+	
+		"ItemSlots"
+		{
+			"0"
+			{
+				"SlotIndex"			"0"
+				"SlotName"			"head"
+				"SlotText"			"#LoadoutSlot_Head"
+				"TextureWidth"		"256"
+				"TextureHeight"		"256"
+				"MaxPolygonsLOD0"	"700"
+				"MaxPolygonsLOD1"	"400"
+			}
+			"1"
+			{
+				"SlotIndex"			"1"
+				"SlotName"			"back"
+				"SlotText"		    "#LoadoutSlot_Back"
+				"TextureWidth"		"512"
+				"TextureHeight"		"512"
+				"MaxPolygonsLOD0"	"700"
+				"MaxPolygonsLOD1"	"400"
+			}
+			"2"
+			{
+				"SlotIndex"			"2"
+				"SlotName"			"armor"
+				"SlotText"		    "#LoadoutSlot_Armor"
+				"TextureWidth"		"256"
+				"TextureHeight"		"256"
+				"MaxPolygonsLOD0"	"700"
+				"MaxPolygonsLOD1"	"400"
+			}
+			"3"
+			{
+				"SlotIndex"			"3"
+				"SlotName"			"mount"
+				"SlotText"		    "#LoadoutSlot_Mount"
+				"TextureWidth"		"512"
+				"TextureHeight"		"512"
+				"MaxPolygonsLOD0"	"1000"
+				"MaxPolygonsLOD1"	"700"
+			}
+			"4"
+			{
+				"SlotIndex"			"4"
+				"SlotName"			"weapon"
+				"SlotText"		    "#LoadoutSlot_Weapon"
+				"TextureWidth"		"256"
+				"TextureHeight"		"256"
+				"MaxPolygonsLOD0"	"400"
+				"MaxPolygonsLOD1"	"250"
+			}
+			"5"
+			{
+				"SlotIndex"			"5"
+				"SlotName"			"taunt"
+				"SlotText"			"#LoadoutSlot_Taunt"
+			}
+			"6"
+			{
+				"SlotIndex"			"6"
+				"SlotName"			"ambient_effects"
+				"SlotText"			"#LoadoutSlot_Ambient_Effects"
+				"DisplayInLoadout"	"0"
+			}
+		}
+		"Bot"
+		{
+			"HeroType"		"DOTA_BOT_STUN_SUPPORT | DOTA_BOT_GANKER"
+			"LaningInfo"
+			{
+				"SoloDesire"		"1"
+				"RequiresBabysit"	"0"
+				"ProvidesBabysit"	"2"
+				"SurvivalRating"	"2"
+				"RequiresFarm"		"1"
+				"ProvidesSetup"		"2"
+				"RequiresSetup"		"0"
+			}
+		}
+	}
+
+}
