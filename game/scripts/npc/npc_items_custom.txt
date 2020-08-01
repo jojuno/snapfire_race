@@ -208,6 +208,9 @@
 		"ItemQuality"					"component"
 		"ItemAliases"					"blink dagger"
 		//"SideShop"						"1"
+		"ItemStockMax"					"1"
+		"ItemStockInitial"				"1"
+		"ItemStockTime"					"200"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
 		"ShouldBeSuggested"				"1"
 		
@@ -255,6 +258,9 @@
 		"ItemQuality"					"epic"
 		"ItemAliases"					"bkb;black king bar"
 		"ItemSellable"					"1"
+		"ItemStockMax"					"1"
+		"ItemStockInitial"				"1"
+		"ItemStockTime"					"200"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
 		"ShouldBeSuggested"				"1"
 		
@@ -302,6 +308,9 @@
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_CUSTOM"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_CUSTOM"
 		"FightRecapLevel"				"1"
+		"ItemStockMax"					"1"
+		"ItemStockInitial"				"1"
+		"ItemStockTime"					"200"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
 
 		// Stats
@@ -376,7 +385,10 @@
 		"ItemQuality"					"common"
 		"ItemAliases"					"phase boots"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
-		"ShouldBeSuggested"				"1"
+		"ShouldBeSuggested"				"1"		
+		"ItemStockMax"					"1"
+		"ItemStockInitial"				"1"
+		"ItemStockTime"					"200"
 		
 		// Special	
 		//-------------------------------------------------------------------------------------------------------------
@@ -452,12 +464,15 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"FightRecapLevel"				"1"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"ItemStockMax"					"1"
+		"ItemStockInitial"				"1"
+		"ItemStockTime"					"200"
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastRange"				"900"
 		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"7.0"
+		"AbilityCooldown"				"10.0"
 		"AbilitySharedCooldown"			"orchid"
 
 		// Item Info
@@ -502,7 +517,7 @@
 			"06"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"silence_duration"		"2"
+				"silence_duration"		"4"
 			}
 		}
 	}
@@ -520,6 +535,9 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"FightRecapLevel"				"2"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
+		"ItemStockMax"					"1"
+		"ItemStockInitial"				"1"
+		"ItemStockTime"					"200"
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
@@ -591,6 +609,9 @@
 		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 		"FightRecapLevel"				"1"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
+		"ItemStockMax"					"1"
+		"ItemStockInitial"				"1"
+		"ItemStockTime"					"200"
 
 		// Stats		
 		//-------------------------------------------------------------------------------------------------------------
@@ -708,6 +729,9 @@
 		"IsTempestDoubleClonable"		"0"
 		"ItemDisassembleRule"				"DOTA_ITEM_DISASSEMBLE_NEVER"
 		"ShouldBeSuggested"				"1"
+		"ItemStockMax"					"1"
+		"ItemStockInitial"				"1"
+		"ItemStockTime"					"200"
 		
 		// Special	
 		//-------------------------------------------------------------------------------------------------------------

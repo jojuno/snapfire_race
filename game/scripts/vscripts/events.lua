@@ -211,55 +211,11 @@ function GameMode:OnPlayerPickHero(keys)
   print(string.format ("Player HSCRIPT: %s", tostring(player)))
   print(string.format ("PlayerID: %s", tostring(playerID)))
 
-  --assign player to a team
-  --to assign creeps to "bad guys"
-  --to avoid death for 26 seconds
-  --[[PlayerResource:SetCustomTeamAssignment( 0, DOTA_TEAM_CUSTOM_1 ) -- put player 0 on Radiant team
-  PlayerResource:SetCustomTeamAssignment( 1, DOTA_TEAM_CUSTOM_2 ) -- put player 0 on Radiant team
-  PlayerResource:SetCustomTeamAssignment( 2, DOTA_TEAM_CUSTOM_3 ) -- put player 0 on Radiant team
-  PlayerResource:SetCustomTeamAssignment( 3, DOTA_TEAM_CUSTOM_4 ) -- put player 0 on Radiant team
-  PlayerResource:SetCustomTeamAssignment( 4, DOTA_TEAM_CUSTOM_5 ) -- put player 0 on Radiant team
-  PlayerResource:SetCustomTeamAssignment( 5, DOTA_TEAM_CUSTOM_6 ) -- put player 0 on Radiant team
-  PlayerResource:SetCustomTeamAssignment( 6, DOTA_TEAM_CUSTOM_7 ) -- put player 0 on Radiant team
-  PlayerResource:SetCustomTeamAssignment( 7, DOTA_TEAM_CUSTOM_8 ) -- put player 0 on Radiant team]]
 
 
-  --for the countdown function
-  function round (num)
-    return math.floor(num + 0.5)
-  end
 
-  local COUNT_DOWN_FROM = 15
-  local endTime = round(GameRules:GetGameTime() + COUNT_DOWN_FROM)
-  GameRules:GetGameModeEntity():SetThink(function ()
-    local delta = round(endTime - GameRules:GetGameTime())
-    if delta > 1 then
-      --Say(nil, tostring(delta), false)
-      print(tostring(delta))
-      --gets the location of the hero entity
-      print(tostring(heroEntity:GetAbsOrigin()))
-      return 1
-    elseif delta == 1 then 
-      --sets the hero to starting line
-      --wrap coordinates within Vector()
-      --(0,0,0) is the coordinates of the center of the map
-      --Vector(-7962.474609, -813.882446, 1024.000000) is in the starting position
-      --offset position by playerID
-      heroEntity:SetOrigin(Vector(-7972.474609, -513.882446 - (playerID * 150), 1024.000000))
-      
-      --heal health and mana to full
-      heroEntity:Heal(5000, nil)
-      heroEntity:GiveMana(5000)
-      --heroEntity:SetDayTimeVisionRange(10000)
-      --set camera to hero because when the hero is relocated, the camera stays still
-      --use global variable 'Player Resource' to call the function
-      PlayerResource:SetCameraTarget(playerID, heroEntity)
-    --must delay the undoing of the SetCameraTarget by a second; if they're back to back, the camera will not move
-    --set to entity to 'nil' to undo setting the camera
-    elseif delta == 0 then
-      PlayerResource:SetCameraTarget(playerID, nil)
-    end
-  end)
+
+
   --once game starts (0:00), this doesn't run anymore
   
 end
@@ -279,7 +235,8 @@ end
 function GameMode:OnEntityKilled( keys )
   DebugPrint( '[BAREBONES] OnEntityKilled Called' )
   DebugPrintTable( keys )
-  PrintTable(keys)
+  --PrintTable(keys)
+
   
 
   -- The Killing entity
@@ -290,16 +247,21 @@ function GameMode:OnEntityKilled( keys )
   local attacker_entity_index = keys.entindex_attacker
     local inflictor_index = keys.entindex_inflictor -- it can be nil if not killed by an item or ability
 
+  
+
   -- Find the entity that was killed
   local killed_unit
   if killed_entity_index then
     killed_unit = EntIndexToHScript(killed_entity_index)
+
   end
 
   -- Find the entity (killer) that killed the entity mentioned above
   local killer_unit
   if attacker_entity_index then
     killer_unit = EntIndexToHScript(attacker_entity_index)
+    --print("[OnEntityKilled] Printing the origin of the killer_unit")
+    --print(tostring(killer_unit:GetAbsOrigin()))
   end
 
   if keys.entindex_attacker ~= nil then
@@ -338,18 +300,21 @@ end
 function GameMode:PlayerConnect(keys)
   DebugPrint('[BAREBONES] PlayerConnect')
   DebugPrintTable(keys)
+  print('[PlayerConnect] the player has connected')
 end
 
 -- This function is called once when the player fully connects and becomes "Ready" during Loading
 function GameMode:OnConnectFull(keys)
   DebugPrint('[BAREBONES] OnConnectFull')
   DebugPrintTable(keys)
+  print('[OnConnectFull] the player has connected FULLY')
   local entIndex = keys.index+1
   -- The Player entity of the joining user
   local ply = EntIndexToHScript(entIndex)
   
   -- The Player ID of the joining player
   local playerID = ply:GetPlayerID()
+  print(tostring(playerID))
 end
 
 -- This function is called whenever illusions are created and tells you which was/is the original entity
@@ -424,5 +389,8 @@ function GameMode:OnPlayerChat(keys)
 
   local text = keys.text
 end
+
+
+
 
 

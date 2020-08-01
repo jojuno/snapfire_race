@@ -7,7 +7,11 @@ function GameMode:HeroKilled(hero, attacker, ability)
     local playerIdx = hero:GetEntityIndex()
     hero.deadHeroPos = hero:GetAbsOrigin()
     local respawnLoc = hero.deadHeroPos
-    hero:SetRespawnPosition(hero.deadHeroPos)
+    if respawnLoc ~= hero:GetAbsOrigin() then
+        hero:SetRespawnPosition(hero:GetAbsOrigin())
+    else
+        hero:SetRespawnPosition(hero.deadHeroPos)
+    end
     hero:Stop()
     hero.deadHeroPos = nil
 end
