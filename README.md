@@ -24,4 +24,10 @@ Bug fixes
 - Players are invulnerable before moving to the start zone
 - If a player dies during the pregame phase, their respawn location will be moved to the starting line
 
+Version 1 7/25/2020
+- simple track with a pregame zone, a starting line and a finish line.
+- hop across hills
+- fight each other
+- fight creeps
+
 thank you to modDota, terkeroo, and barebones.
