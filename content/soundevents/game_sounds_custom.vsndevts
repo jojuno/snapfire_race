@@ -1,4 +1,4 @@
-"snapfireOlympics.introAndBackground"
+"snapfireOlympics.introAndBackground3"
 {
 	"operator_stacks"
 	{
@@ -14,16 +14,16 @@
 					{
 						"value"
 						{
-							"value0"		"sounds/snapfireOlympicsIntroAndBackground.vsnd"
+							"value0"		"sounds/snapfireOlympicsIntroAndBackground3.vsnd"
 						}
 					}
 					"volume_min"
 					{
-						"value"		"10.000000"
+						"value"		"11.000000"
 					}
 					"volume_max"
 					{
-						"value"		"10.000000"
+						"value"		"11.000000"
 					}
 					"pitch_min"
 					{
@@ -43,11 +43,11 @@
 					}
 					"soundlevel_min"
 					{
-						"value"		"90.000000"
+						"value"		"97.000000"
 					}
 					"soundlevel_max"
 					{
-						"value"		"90.000000"
+						"value"		"97.000000"
 					}
 				}
 			}

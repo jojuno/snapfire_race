@@ -7,7 +7,7 @@ ALLOW_SAME_HERO_SELECTION = true        -- Should we let people select the same 
 
 HERO_SELECTION_TIME = 0             -- How long should we let people select their hero?
 -- set to 5 for building
-PRE_GAME_TIME = 15                -- How long after people select their heroes should the horn blow and the game start?
+PRE_GAME_TIME = 27              -- How long after people select their heroes should the horn blow and the game start?
 POST_GAME_TIME = 60.0                   -- How long should we let people look at the scoreboard before closing the server automatically?
 TREE_REGROW_TIME = 60.0                 -- How long should it take individual trees to respawn after being cut down/destroyed?
 
@@ -121,5 +121,5 @@ CUSTOM_TEAM_PLAYER_COUNT[DOTA_TEAM_CUSTOM_3] = 1
 CUSTOM_TEAM_PLAYER_COUNT[DOTA_TEAM_CUSTOM_4] = 1
 CUSTOM_TEAM_PLAYER_COUNT[DOTA_TEAM_CUSTOM_5] = 1
 CUSTOM_TEAM_PLAYER_COUNT[DOTA_TEAM_CUSTOM_6] = 1
-CUSTOM_TEAM_PLAYER_COUNT[DOTA_TEAM_CUSTOM_7] = 0
-CUSTOM_TEAM_PLAYER_COUNT[DOTA_TEAM_CUSTOM_8] = 0
+CUSTOM_TEAM_PLAYER_COUNT[DOTA_TEAM_CUSTOM_7] = 1
+CUSTOM_TEAM_PLAYER_COUNT[DOTA_TEAM_CUSTOM_8] = 1

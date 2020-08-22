@@ -1,7 +1,6 @@
 -- This function initializes the game mode and is called before anyone loads into the game
 -- It can be used to pre-initialize any values/tables that will be needed later
 function GameMode:_InitGameMode()
-  print('[GameMode:_InitGameMode] in the underscore InitGameMode function.')
   if GameMode._reentrantCheck then
     return
   end
@@ -29,6 +28,11 @@ function GameMode:_InitGameMode()
   GameRules:SetCustomGameEndDelay( GAME_END_DELAY )
   GameRules:SetCustomVictoryMessageDuration( VICTORY_MESSAGE_DURATION )
   GameRules:SetStartingGold( STARTING_GOLD )
+
+  --disable default background music
+  GameRules:SetCustomGameAllowBattleMusic(false)
+  GameRules:SetCustomGameAllowHeroPickMusic(false)
+  GameRules:SetCustomGameAllowMusicAtGameStart(false)
 
   if SKIP_TEAM_SETUP then
     GameRules:SetCustomGameSetupAutoLaunchDelay( 0 )
@@ -139,8 +143,6 @@ function GameMode:_InitGameMode()
   -- Initialized tables for tracking state
   self.bSeenWaitForPlayers = false
   self.vUserIds = {}
-
-  print('[Game_Mode:_InitGameMode] Done loading Snapfire Olympics gamemode!\n\n')
 end
 
 mode = nil
@@ -150,6 +152,8 @@ function GameMode:_CaptureGameMode()
   if mode == nil then
     -- Set GameMode parameters
     mode = GameRules:GetGameModeEntity()        
+    
+
     mode:SetRecommendedItemsDisabled( RECOMMENDED_BUILDS_DISABLED )
     mode:SetCameraDistanceOverride( CAMERA_DISTANCE_OVERRIDE )
     mode:SetCustomBuybackCostEnabled( CUSTOM_BUYBACK_COST_ENABLED )
@@ -174,7 +178,7 @@ function GameMode:_CaptureGameMode()
       mode:SetCustomGameForceHero( FORCE_PICKED_HERO )
     end
     mode:SetFixedRespawnTime( FIXED_RESPAWN_TIME ) 
-    mode:SetRespawnTimeScale( 0.001)
+    mode:SetRespawnTimeScale( 0.001 )
     mode:SetFountainConstantManaRegen( FOUNTAIN_CONSTANT_MANA_REGEN )
     mode:SetFountainPercentageHealthRegen( FOUNTAIN_PERCENTAGE_HEALTH_REGEN )
     mode:SetFountainPercentageManaRegen( FOUNTAIN_PERCENTAGE_MANA_REGEN )

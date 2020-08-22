@@ -1,3 +1,6 @@
+------------------------------------------------
+--for future version
+------------------------------------------------
 function ArrowTrigger(trigger)
     --summon miranas
     --start shooting sacred arrows
