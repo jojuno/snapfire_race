@@ -227,17 +227,17 @@ function GameMode:OnAllPlayersLoaded()
         GameMode.playerEnts[heroEntity:GetPlayerID()]["laps"][GameMode.playerEnts[heroEntity:GetPlayerID()]["currentLap"]]["finished"] = false
         GameMode.playerEnts[heroEntity:GetPlayerID()]["laps"][GameMode.playerEnts[heroEntity:GetPlayerID()]["currentLap"]]["place"] = nil
 
-        --[[--force staff happens because it's queued on the list of orders
+        --force staff happens because it's queued on the list of orders
         local startEnt = Entities:FindByName(nil, string.format("spawn_player_start_%s", rank))
         -- GetAbsOrigin() is a function that can be called on any entity to get its location
         local startPosition = startEnt:GetAbsOrigin()
-        heroEntity:SetAbsOrigin(startPosition)]]
+        heroEntity:SetAbsOrigin(startPosition)
 
-        --for testing
-        local startEnt = Entities:FindByName(nil, "respawn_checkpoint_4")
+        --[[--for testing
+        local startEnt = Entities:FindByName(nil, "respawn_checkpoint_6")
         -- GetAbsOrigin() is a function that can be called on any entity to get its location
         local startPosition = startEnt:GetAbsOrigin()
-        heroEntity:SetAbsOrigin(startPosition)
+        heroEntity:SetAbsOrigin(startPosition)]]
 
         --set camera to hero because when the hero is relocated, the camera stays still
         --use global variable 'PlayerResource' to call the function
@@ -279,7 +279,7 @@ function GameMode:OnHeroInGame(hero)
   hero:AddItem(item)
 
   --for future version
-  hero:GetPlayerOwner():SetMusicStatus(0, 0)
+  --hero:GetPlayerOwner():SetMusicStatus(0, 0)
   
 
 

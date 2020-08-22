@@ -30,9 +30,9 @@ function GameMode:_InitGameMode()
   GameRules:SetStartingGold( STARTING_GOLD )
 
   --disable default background music
-  GameRules:SetCustomGameAllowBattleMusic(false)
+  --[[GameRules:SetCustomGameAllowBattleMusic(false)
   GameRules:SetCustomGameAllowHeroPickMusic(false)
-  GameRules:SetCustomGameAllowMusicAtGameStart(false)
+  GameRules:SetCustomGameAllowMusicAtGameStart(false)]]
 
   if SKIP_TEAM_SETUP then
     GameRules:SetCustomGameSetupAutoLaunchDelay( 0 )

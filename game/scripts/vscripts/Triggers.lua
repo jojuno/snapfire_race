@@ -4,6 +4,9 @@ local LAVA_DAMAGE_TICK_RATE = 1
 
 function LavaTrigger(trigger)
         local ent = trigger.activator
+        if not ent:IsHero() then
+            ent:ForceKill(true)
+        end
 
         if not ent then return end
         ent:ForceKill(true)
