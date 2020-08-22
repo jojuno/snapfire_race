@@ -21,12 +21,14 @@ function Precache( context )
   PrecacheResource("particle", "particles/econ/generic/generic_aoe_explosion_sphere_1/generic_aoe_explosion_sphere_1.vpcf", context)
   PrecacheResource("particle_folder", "particles/test_particle", context)
   PrecacheResource("particle", "particles/units/heroes/hero_snapfire/hero_snapfire_cookie_projectile.vpcf", context)
+  PrecacheResource("particle", "particles/units/heroes/hero_snapfire/hero_snapfire_cookie_projectile.vpcf", context)
 
 
   -- Models can also be precached by folder or individually
   -- PrecacheModel should generally used over PrecacheResource for individual models
   PrecacheResource("model_folder", "particles/heroes/antimage", context)
   PrecacheResource("model", "particles/heroes/viper/viper.vmdl", context)
+  PrecacheResource("model", "models/heroes/undying/undying_tower.vmdl", context)
   PrecacheModel("models/heroes/viper/viper.vmdl", context)
   --PrecacheModel("models/props_gameplay/treasure_chest001.vmdl", context)
   --PrecacheModel("models/props_debris/merchant_debris_chest001.vmdl", context)

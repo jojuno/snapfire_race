@@ -1,4 +1,4 @@
-"snapfireOlympics.introAndBackground"
+"snapfireOlympics.introAndBackground3"
 {
 	"operator_stacks"
 	{
@@ -14,16 +14,16 @@
 					{
 						"value"
 						{
-							"value0"		"sounds/snapfireOlympicsIntroAndBackground.vsnd"
+							"value0"		"sounds/snapfireOlympicsIntroAndBackground3.vsnd"
 						}
 					}
 					"volume_min"
 					{
-						"value"		"10.000000"
+						"value"		"11.000000"
 					}
 					"volume_max"
 					{
-						"value"		"10.000000"
+						"value"		"11.000000"
 					}
 					"pitch_min"
 					{
@@ -43,11 +43,67 @@
 					}
 					"soundlevel_min"
 					{
-						"value"		"90.000000"
+						"value"		"97.000000"
 					}
 					"soundlevel_max"
 					{
-						"value"		"90.000000"
+						"value"		"97.000000"
+					}
+				}
+			}
+		}
+	}
+}
+"snapfireOlympics.pregame"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"		"sos_reference_stack"
+				"reference_stack"		"dota_src1_3d"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"		"sounds/snapfireOlympicsPregame.vsnd"
+						}
+					}
+					"volume_min"
+					{
+						"value"		"11.000000"
+					}
+					"volume_max"
+					{
+						"value"		"11.000000"
+					}
+					"pitch_min"
+					{
+						"value"		"1.000000"
+					}
+					"pitch_max"
+					{
+						"value"		"1.000000"
+					}
+					"chan_type"
+					{
+						"value"		"6"
+					}
+					"memory_type"
+					{
+						"value"		"0"
+					}
+					"soundlevel_min"
+					{
+						"value"		"97.000000"
+					}
+					"soundlevel_max"
+					{
+						"value"		"97.000000"
 					}
 				}
 			}

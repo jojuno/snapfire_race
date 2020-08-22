@@ -198,26 +198,14 @@ end
 
 -- A player picked a hero
 function GameMode:OnPlayerPickHero(keys)
-  print('[ON_PLAYER_PICK_HERO] inside the function.')
   DebugPrint('[BAREBONES] OnPlayerPickHero')
-  PrintTable(keys)
-  print ( string.format ('PrintTable type %s', type(keys)) )
   local heroClass = keys.hero
   local heroEntity = EntIndexToHScript(keys.heroindex)
   local player = EntIndexToHScript(keys.player)
   --playerID is based on the order the player joined the game
   local playerID = player:GetPlayerID()
   --player id for the first player = 0
-  print(string.format ("Player HSCRIPT: %s", tostring(player)))
-  print(string.format ("PlayerID: %s", tostring(playerID)))
-
-
-
-
-
-
   --once game starts (0:00), this doesn't run anymore
-  
 end
 
 -- A player killed another player in a multi-team context
@@ -235,9 +223,6 @@ end
 function GameMode:OnEntityKilled( keys )
   DebugPrint( '[BAREBONES] OnEntityKilled Called' )
   DebugPrintTable( keys )
-  --PrintTable(keys)
-
-  
 
   -- The Killing entity
   local killerEntity = nil
@@ -245,23 +230,18 @@ function GameMode:OnEntityKilled( keys )
   -- Indexes:
   local killed_entity_index = keys.entindex_killed
   local attacker_entity_index = keys.entindex_attacker
-    local inflictor_index = keys.entindex_inflictor -- it can be nil if not killed by an item or ability
-
-  
+  local inflictor_index = keys.entindex_inflictor -- it can be nil if not killed by an item or ability
 
   -- Find the entity that was killed
   local killed_unit
   if killed_entity_index then
     killed_unit = EntIndexToHScript(killed_entity_index)
-
   end
 
   -- Find the entity (killer) that killed the entity mentioned above
   local killer_unit
   if attacker_entity_index then
     killer_unit = EntIndexToHScript(attacker_entity_index)
-    --print("[OnEntityKilled] Printing the origin of the killer_unit")
-    --print(tostring(killer_unit:GetAbsOrigin()))
   end
 
   if keys.entindex_attacker ~= nil then
@@ -287,34 +267,24 @@ function GameMode:OnEntityKilled( keys )
   end
 end
 
-
---more creeps in the pits
-
-
-
-
-
-
 -- This function is called 1 to 2 times as the player connects initially but before they 
 -- have completely connected
 function GameMode:PlayerConnect(keys)
   DebugPrint('[BAREBONES] PlayerConnect')
   DebugPrintTable(keys)
-  print('[PlayerConnect] the player has connected')
+
 end
 
 -- This function is called once when the player fully connects and becomes "Ready" during Loading
 function GameMode:OnConnectFull(keys)
   DebugPrint('[BAREBONES] OnConnectFull')
   DebugPrintTable(keys)
-  print('[OnConnectFull] the player has connected FULLY')
   local entIndex = keys.index+1
   -- The Player entity of the joining user
   local ply = EntIndexToHScript(entIndex)
   
   -- The Player ID of the joining player
   local playerID = ply:GetPlayerID()
-  print(tostring(playerID))
 end
 
 -- This function is called whenever illusions are created and tells you which was/is the original entity
@@ -386,11 +356,26 @@ function GameMode:OnPlayerChat(keys)
   local teamonly = keys.teamonly
   local userID = keys.userid
   --local playerID = self.vUserIds[userID]:GetPlayerID()
-
   local text = keys.text
 end
 
 
-
+-- This function turns the "name" table into vector table
+function GameMode:InitializeVectors()
+  for i,list in pairs(MultPatrol) do
+    MultVector[i] = {}
+    for j,entloc in pairs(list) do
+      local pos = Entities:FindByName(nil, entloc):GetAbsOrigin()
+      MultVector[i][j] = pos
+    end
+  end
+  --[[for i,list in pairs(Bounds) do
+    BoundsVector[i] = {}
+    for j,entloc in pairs(list) do
+      local pos = Entities:FindByName(nil, entloc):GetAbsOrigin()
+      BoundsVector[i][j] = pos
+    end
+  end]]
+end
 
 

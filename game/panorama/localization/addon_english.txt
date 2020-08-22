@@ -5,8 +5,8 @@
 	"Neutrals"        								"Neutral Team"
 	"NoTeam"          								"No Team"
 
-	"DOTA_GoodGuys"   								"Radiant"
-	"DOTA_BadGuys"    								"Dire"
+	"DOTA_GoodGuys"   								"Teal Tiger"
+	"DOTA_BadGuys"    								"Yellow Monkey"
 	"DOTA_Custom1"    								"Knuck 1"
 	"DOTA_Custom2"    								"Knuck 2"
 	"DOTA_Custom3"    								"Knuck 3"
@@ -16,5 +16,5 @@
 	"DOTA_Custom7"    								"Knuck 7"
 	"DOTA_Custom8"    								"Knuck 8"
 	
-	"addonname"										"Snapfire Race"
+	"addonname"										"Barebones"
 }
