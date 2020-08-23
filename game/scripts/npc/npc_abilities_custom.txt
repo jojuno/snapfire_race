@@ -389,7 +389,7 @@
 			{
 				"var_type"					"FIELD_INTEGER"
 				//this decides how far you jump
-				"jump_horizontal_distance"	"600" //"400 450 500 550"
+				"jump_horizontal_distance"	"650" //"400 450 500 550"
 			}
 			"06"
 			{
@@ -414,7 +414,7 @@
 			"10"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"impact_stun_duration"	"2"
+				"impact_stun_duration"	"1.5"
 			}
 			"11"
 			{
@@ -1188,23 +1188,23 @@
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"shrapnel_damage"		"500"
+				"shrapnel_damage"		"1000"
 				"LinkedSpecialBonus"	"special_bonus_unique_sniper_1"
 			}
 			"04"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"duration"				"5.0"
+				"duration"				"3.0"
 			}
 			"05"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"damage_delay"			"0"
+				"damage_delay"			"1"
 			}
 			"06"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"slow_duration"			"2.0 2.0 2.0 2.0"
+				"slow_duration"			"0"
 			}
 		}
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"

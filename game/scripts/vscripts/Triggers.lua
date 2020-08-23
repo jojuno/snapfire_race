@@ -1,8 +1,8 @@
 require('libraries/notifications')
 
-local LAVA_DAMAGE_TICK_RATE = 1
-
-function LavaTrigger(trigger)
+--causes issues where players are not killed if the entity is triggered by multiple players at the same time
+--may need it because of killing players twice
+--[[function LavaTrigger(trigger)
         local ent = trigger.activator
         if not ent:IsHero() then
             ent:ForceKill(true)
@@ -11,7 +11,20 @@ function LavaTrigger(trigger)
         if not ent then return end
         ent:ForceKill(true)
 
-    return LAVA_DAMAGE_TICK_RATE
+    return 0.1
+end]]
+
+function Checkpoint1Trigger(trigger)
+    local ent = trigger.activator
+    if not ent then return end
+
+    if not GameMode.playerEnts[ent:GetPlayerID()]["zoneTriggered"][1] then
+        GameMode.playerEnts[ent:GetPlayerID()]["zoneTriggered"][1] = true
+        local respawnEnt = Entities:FindByName(nil, "respawn_checkpoint_1_2")
+        --set it as a field so that it can be accessed in "core_mechanics" "HeroKilled"
+        GameMode.playerEnts[ent:GetPlayerID()]["hero"].respawnPosition = respawnEnt:GetAbsOrigin()
+        Notifications:Bottom(ent:GetPlayerID(), {text="Checkpoint 1 Activated", duration = 5})
+    end
 end
 
 function Checkpoint2Trigger(trigger)
@@ -186,6 +199,8 @@ function Checkpoint6Trigger(trigger)
         --spawn feed me for players
         GameMode:SpawnFeedMe(ent:GetPlayerID())
         Notifications:Bottom(ent:GetPlayerID(), {text="Checkpoint 6 Activated", duration = 5})
+        --shows on the next line
+        Notifications:Bottom(ent:GetPlayerID(), {text="You have gained a creep", duration = 5})
     end
 
     if not GameMode.zone6Active then
@@ -229,7 +244,6 @@ end
 function Checkpoint7Trigger(trigger)
     local ent = trigger.activator
     if not ent then return end 
-
     if not GameMode.playerEnts[ent:GetPlayerID()]["zoneTriggered"][7] then
         GameMode.playerEnts[ent:GetPlayerID()]["zoneTriggered"][7] = true
         local respawnEnt = Entities:FindByName(nil, "respawn_checkpoint_7")
@@ -270,7 +284,7 @@ function Checkpoint8Trigger(trigger)
     if not ent then return end 
 
     if not GameMode.zone8Active then
-        for i = 1,54 do
+        for i = 1,48 do
             local spawn_loc_name = string.format("spawn_ult_creep_%s", i)
             GameMode:SpawnUltCreep(spawn_loc_name)
         end
