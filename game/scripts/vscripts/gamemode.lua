@@ -113,14 +113,12 @@ end
 
 function GameMode:OnAllPlayersLoaded()
 
-
-
   --for the countdown function
   function round (num)
     return math.floor(num + 0.5)
   end
 
-  local COUNT_DOWN_FROM = 27
+  local COUNT_DOWN_FROM = 30
   local endTime = round(GameRules:GetGameTime() + COUNT_DOWN_FROM)
 
   self.damageRanking = {}
@@ -130,15 +128,15 @@ function GameMode:OnAllPlayersLoaded()
     local delta = round(endTime - GameRules:GetGameTime())
 
     --starting message
-    if delta == 26 then
+    if delta == 29 then
       Notifications:TopToAll({text="Pregame: Bang 'em up to seed first!" , duration= 5.0, style={["font-size"] = "45px", color = "red"}})
       return 1
 
-    elseif delta > 7 then
+    elseif delta > 9 then
       --sets the amount of seconds until SetThink is called again
       return 1
 
-    elseif delta == 7 then
+    elseif delta == 9 then
       Notifications:BottomToAll({text="Get ready!" , duration= 5.0, style={["font-size"] = "45px", color = "red"}})
       for playerID = 0, 9 do
         if PlayerResource:IsValidPlayerID(playerID) then
@@ -146,7 +144,7 @@ function GameMode:OnAllPlayersLoaded()
           heroEntity:ForceKill(true)
         end
       end
-      return 3
+      return 5
 
 
     --play the starting sound
@@ -218,7 +216,7 @@ function GameMode:OnAllPlayersLoaded()
         -- cannot purge fiery soul
         --heroEntity:RemoveModifierByName("modifier_fiery_soul_on_kill_lua")
         
-        local respawnEnt = Entities:FindByName(nil, "respawn_checkpoint_1")
+        local respawnEnt = Entities:FindByName(nil, "respawn_checkpoint_1_1")
         local respawnVector = respawnEnt:GetAbsOrigin()
         --set it as a field so that it can be accessed in "core_mechanics" "HeroKilled"
         GameMode.playerEnts[heroEntity:GetPlayerID()]["hero"].respawnPosition = respawnVector
@@ -234,7 +232,7 @@ function GameMode:OnAllPlayersLoaded()
         heroEntity:SetAbsOrigin(startPosition)
 
         --[[--for testing
-        local startEnt = Entities:FindByName(nil, "respawn_checkpoint_6")
+        local startEnt = Entities:FindByName(nil, "respawn_checkpoint_3")
         -- GetAbsOrigin() is a function that can be called on any entity to get its location
         local startPosition = startEnt:GetAbsOrigin()
         heroEntity:SetAbsOrigin(startPosition)]]
@@ -308,6 +306,7 @@ function GameMode:OnHeroInGame(hero)
   GameMode.playerEnts[hero:GetPlayerID()]["currentLap"] = 0
   GameMode.playerEnts[hero:GetPlayerID()]["score"] = 0
   GameMode.playerEnts[hero:GetPlayerID()]["zoneTriggered"] = {}
+  GameMode.playerEnts[hero:GetPlayerID()]["zoneTriggered"][1] = false
   GameMode.playerEnts[hero:GetPlayerID()]["zoneTriggered"][2] = false
   GameMode.playerEnts[hero:GetPlayerID()]["zoneTriggered"][3] = false
   GameMode.playerEnts[hero:GetPlayerID()]["zoneTriggered"][4] = false
@@ -456,7 +455,10 @@ function GameMode:SpawnKardel(spawn_loc_name)
   local spawnEnt = Entities:FindByName(nil, spawn_loc_name)
   local spawnVector = spawnEnt:GetAbsOrigin()
   local spawnedUnit = CreateUnitByName("kardel", spawnVector, true, nil, nil, DOTA_TEAM_BADGUYS)
-  spawnedUnit.castAngleDegrees = 210
+  --version 4
+  --spawnedUnit.castAngleDegrees = 210
+  --version 4.1
+  spawnedUnit.castEntitySet = 0
   spawnedUnit:AddNewModifier(nil, nil, "modifier_invulnerable", {})
   spawnedUnit:SetThink("KardelThinker", self)
   self.spawns[2]["kardel"] = spawnedUnit
@@ -587,30 +589,47 @@ end
 ---------Thinkers
 
 --kardel to shrapnel randomly throughout zone 2
+--make kardel unselectable
 function GameMode:KardelThinker(unit)
   local abil = unit:FindAbilityByName("shrapnel_custom")
-  local pos = unit:GetAbsOrigin()
-  if unit:IsAlive() then
-    math.randomseed(GameRules:GetGameTime())
-    local radius = 500 + 500 * math.random(1, 4)
-    local anglerad = math.rad(GameMode.spawns[2]["kardel"].castAngleDegrees)
-    GameMode.spawns[2]["kardel"].castAngleDegrees = GameMode.spawns[2]["kardel"].castAngleDegrees - 30
-    if GameMode.spawns[2]["kardel"].castAngleDegrees < 90 then
-      GameMode.spawns[2]["kardel"].castAngleDegrees = GameMode.spawns[2]["kardel"].castAngleDegrees + 150
-    end
-    --math.cos and math.sin determine where in the circle to point
-    --cos = adjacent, sin = opposite
-    --0 radians makes them point to the right (east)
-    --pi/2 (90 degrees) radians makes them point to the north
-    --pi (180) degrees) radians makes them point to the west
-    --3pi/2 (270 degrees) radians makes them point to the south
-    --2pi (360 degrees) radians makes them point to the east
-    local castpos = Vector(pos.x + radius*math.cos(anglerad), pos.y + radius*math.sin(anglerad), pos.z)
-    unit:CastAbilityOnPosition(castpos, abil, -1)
-    return 1
+  --version 4
+  
+  --[[local pos = unit:GetAbsOrigin()
+  math.randomseed(GameRules:GetGameTime())
+  local randomNumber = math.random(1, 2)
+  local radius = 0
+  if randomNumber == 1 then
+    radius = 1100
   else
-    return nil
+    radius = 2500
   end
+  local radius = 500 + 500 * math.random(3, 4)
+  local anglerad = math.rad(GameMode.spawns[2]["kardel"].castAngleDegrees)
+  GameMode.spawns[2]["kardel"].castAngleDegrees = GameMode.spawns[2]["kardel"].castAngleDegrees - 30
+  if GameMode.spawns[2]["kardel"].castAngleDegrees < 90 then
+    GameMode.spawns[2]["kardel"].castAngleDegrees = GameMode.spawns[2]["kardel"].castAngleDegrees + 150
+  end
+  --math.cos and math.sin determine where in the circle to point
+  --cos = adjacent, sin = opposite
+  --0 radians makes them point to the right (east)
+  --pi/2 (90 degrees) radians makes them point to the north
+  --pi (180) degrees) radians makes them point to the west
+  --3pi/2 (270 degrees) radians makes them point to the south
+  --2pi (360 degrees) radians makes them point to the east
+  --local castpos = Vector(pos.x + radius*math.cos(anglerad), pos.y + radius*math.sin(anglerad), pos.z)
+  unit:CastAbilityOnPosition(castpos, abil, -1)
+  return 1]]
+  --version 4.1
+  math.randomseed(GameRules:GetGameTime())
+  local randomNumber = math.random(1, 3)
+  local castEnt = Entities:FindByName(nil, string.format("shrapnel_entity_%s", unit.castEntitySet * 3 + randomNumber))
+  unit.castEntitySet = unit.castEntitySet + 1
+  if unit.castEntitySet == 6 then
+    unit.castEntitySet = 0
+  end
+  local castPos = castEnt:GetAbsOrigin()
+  unit:CastAbilityOnPosition(castPos, abil, -1)
+  return 1
 end
 
 
@@ -621,7 +640,7 @@ function GameMode:PudgeThinker(unit)
   local pos = unit:GetAbsOrigin()
   local r = 1000
   if unit:IsAlive() then
-    local anglerad = math.rad(RandomFloat(70, 110))
+    local anglerad = math.rad(RandomFloat(75, 110))
     local castpos = Vector(pos.x + r*math.cos(anglerad), pos.y + r*math.sin(anglerad), pos.z)
     unit:CastAbilityOnPosition(castpos, abil, -1)
     math.randomseed(GameRules:GetGameTime())

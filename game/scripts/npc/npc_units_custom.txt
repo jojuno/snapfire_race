@@ -957,7 +957,7 @@
     // Abilities
     //----------------------------------------------------------------
     "Ability1"              "shrapnel_custom"
-    "Ability3"              ""
+    "Ability3"              "patrol_unit_passive"
     "Ability4"              ""
 
     // Movement
