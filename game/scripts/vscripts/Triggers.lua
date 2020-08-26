@@ -38,13 +38,27 @@ function Checkpoint2Trigger(trigger)
         GameMode.playerEnts[ent:GetPlayerID()]["hero"].respawnPosition = respawnEnt:GetAbsOrigin()
         Notifications:Bottom(ent:GetPlayerID(), {text="Checkpoint 2 Activated", duration = 5})
     end
+end
 
-    if not GameMode.zone2Active then
+function Checkpoint2_2Trigger(trigger)
+    local ent = trigger.activator
+    if not ent then return end
+
+    if not GameMode.playerEnts[ent:GetPlayerID()]["zoneTriggered"][2.2] then
+        GameMode.playerEnts[ent:GetPlayerID()]["zoneTriggered"][2.2] = true
+        local respawnEnt = Entities:FindByName(nil, "respawn_checkpoint_2_2")
+        --set it as a field so that it can be accessed in "core_mechanics" "HeroKilled"
+        GameMode.playerEnts[ent:GetPlayerID()]["hero"].respawnPosition = respawnEnt:GetAbsOrigin()
+        Notifications:Bottom(ent:GetPlayerID(), {text="Checkpoint 2-2 Activated", duration = 5})
+        Notifications:Bottom(ent:GetPlayerID(), {text="Avoid the shrapnel", duration = 5})
+    end
+
+    if not GameMode.zone2_2Active then
         --spawn kardel
         local spawn_loc_name = "spawn_kardel"
         --call function in gamemode.lua with GameMode:xxx
         GameMode:SpawnKardel(spawn_loc_name)
-        GameMode.zone2Active = true
+        GameMode.zone2_2Active = true
     end
 end
 
@@ -64,7 +78,7 @@ function Checkpoint3Trigger(trigger)
 
     if not GameMode.zone3Active then
         --spawn pudge
-        for i = 1, 10 do
+        for i = 1, 6 do
             local spawn_loc_name = string.format("spawn_pudge_%s", i)
             GameMode:SpawnPudge(spawn_loc_name)
         end
@@ -81,9 +95,9 @@ function Checkpoint3Trigger(trigger)
             numTriggered = numTriggered + 1
         end
     end
-    if numTriggered == GameMode.numPlayers and GameMode.zone2Active then
-        GameMode.spawns[2]["kardel"]:ForceKill(false)
-        GameMode.zone2Active = false
+    if numTriggered == GameMode.numPlayers and GameMode.zone2_2Active then
+        GameMode.spawns[2.2]["kardel"]:ForceKill(false)
+        GameMode.zone2_2Active = false
     end
 end
 
@@ -153,17 +167,17 @@ function Checkpoint5Trigger(trigger)
             GameMode:SpawnPhoenix(spawn_loc_name)
         end
       
-        for i = 1, 10 do
+        --[[for i = 1, 10 do
             local spawn_loc_name = string.format("spawn_harpy_%s", i)
             GameMode:SpawnNeutral(spawn_loc_name, "harpy_scout", 600, 500)
-        end
+        end]]
       
-        for i = 1, 8 do
+        --[[for i = 1, 8 do
             local spawn_loc_name = string.format("spawn_ghost_%s", i)
             GameMode:SpawnNeutral(spawn_loc_name, "ghost", 600, 500)
-        end
+        end]]
       
-        for i = 1, 5 do
+        for i = 1, 4 do
             local spawn_loc_name = string.format("spawn_drow_%s", i)
             GameMode:SpawnDrow(spawn_loc_name)
         end
@@ -196,20 +210,40 @@ function Checkpoint6Trigger(trigger)
         local respawnEnt = Entities:FindByName(nil, "respawn_checkpoint_6")
         --set it as a field so that it can be accessed in "core_mechanics" "HeroKilled"
         GameMode.playerEnts[ent:GetPlayerID()]["hero"].respawnPosition = respawnEnt:GetAbsOrigin()
-        --spawn feed me for players
-        GameMode:SpawnFeedMe(ent:GetPlayerID())
         Notifications:Bottom(ent:GetPlayerID(), {text="Checkpoint 6 Activated", duration = 5})
-        --shows on the next line
-        Notifications:Bottom(ent:GetPlayerID(), {text="You have gained a creep", duration = 5})
     end
 
     if not GameMode.zone6Active then
-        for position = 1, 52 do
-            local spawn_loc_name = string.format("spawn_zombie_%s", position)
-            GameMode:SpawnZombie(spawn_loc_name, position)
+        for position = 1, 5 do
+            local spawn_loc_name = string.format("spawn_mirana_%s", position)
+            GameMode:SpawnMirana(spawn_loc_name)
         end
         GameMode.zone6Active = true
     end
+
+    --[[if not GameMode.zone6Active then
+        --to the right
+        --downward
+        for position = 1, 13 do
+            local orientation = "right"
+            local spawn_loc_name = string.format("spawn_touch_me_%s", position)
+            GameMode:SpawnTouchMe(spawn_loc_name, orientation)
+        end
+        for position = 14, 21 do
+            local orientation = "down"
+            local spawn_loc_name = string.format("spawn_touch_me_%s", position)
+            GameMode:SpawnTouchMe(spawn_loc_name, orientation)
+        end
+        GameMode.zone6Active = true
+    end]]
+
+    --[[if not GameMode.zone6Active then
+        --spawn invoker
+        local spawn_loc_name = "spawn_lina_1"
+        --call function in gamemode.lua with GameMode:xxx
+        GameMode:SpawnInvoker(spawn_loc_name)
+        GameMode.zone6Active = true
+    end]]
     
     --kill creeps from zone 5 when everyone's finished
     local numTriggered = 0
@@ -221,14 +255,14 @@ function Checkpoint6Trigger(trigger)
         end
     end
     if numTriggered == GameMode.numPlayers and GameMode.zone5Active then
-        for spawn_loc_name, ghost in pairs(GameMode.spawns[5]["ghosts"]) do
+        --[[for spawn_loc_name, ghost in pairs(GameMode.spawns[5]["ghosts"]) do
             ghost:ForceKill(false)
             ghost.active = false
-        end
-        for spawn_loc_name, harpy_scout in pairs(GameMode.spawns[5]["harpy_scouts"]) do
+        end]]
+        --[[for spawn_loc_name, harpy_scout in pairs(GameMode.spawns[5]["harpy_scouts"]) do
             harpy_scout:ForceKill(false)
             harpy_scout.active = false
-        end
+        end]]
         for spawn_loc_name, drow in pairs(GameMode.spawns[5]["drows"]) do
             drow:ForceKill(false)
             drow.active = false
@@ -247,20 +281,26 @@ function Checkpoint7Trigger(trigger)
     if not GameMode.playerEnts[ent:GetPlayerID()]["zoneTriggered"][7] then
         GameMode.playerEnts[ent:GetPlayerID()]["zoneTriggered"][7] = true
         local respawnEnt = Entities:FindByName(nil, "respawn_checkpoint_7")
+        
+        --[[--spawn feed me for players
+        GameMode:SpawnFeedMe(ent:GetPlayerID())]]
         --set it as a field so that it can be accessed in "core_mechanics" "HeroKilled"
         GameMode.playerEnts[ent:GetPlayerID()]["hero"].respawnPosition = respawnEnt:GetAbsOrigin()
         Notifications:Bottom(ent:GetPlayerID(), {text="Checkpoint 7 Activated", duration = 5})
+        --[[--shows on the next line
+        Notifications:Bottom(ent:GetPlayerID(), {text="Use your creep to stun lina", duration = 10})]]
+        Notifications:Bottom(ent:GetPlayerID(), {text="Use your cookie to stun lina", duration = 10})
     end
 
     if not GameMode.zone7Active then
-        for i = 1, 10 do
+        for i = 1, 5 do
             local spawn_loc_name = string.format("spawn_lina_%s", i)
             GameMode:SpawnLina(spawn_loc_name)
         end
         GameMode.zone7Active = true
     end
 
-    --kill zombies when everyone's finished
+    --[[--kill "touch me"s when everyone's finished
     local numTriggered = 0
     for playerID, player in ipairs(GameMode.playerEnts), GameMode.playerEnts, -1 do
         if player["zoneTriggered"][7] == false then
@@ -271,9 +311,26 @@ function Checkpoint7Trigger(trigger)
     end
 
     if numTriggered == GameMode.numPlayers and GameMode.zone6Active then
-        for spawn_loc_name, zombie in pairs(GameMode.spawns[6]["zombies"]) do
-            zombie:ForceKill(false)
-            zombie.active = false
+        for spawn_loc_name, touch_me in pairs(GameMode.spawns[6]["touch_mes"]) do
+            touch_me:ForceKill(false)
+            touch_me.active = false
+        end
+        GameMode.zone6Active = false
+    end]]
+
+    local numTriggered = 0
+    for playerID, player in ipairs(GameMode.playerEnts), GameMode.playerEnts, -1 do
+        if player["zoneTriggered"][7] == false then
+            break
+        else
+            numTriggered = numTriggered + 1
+        end
+    end
+
+    if numTriggered == GameMode.numPlayers and GameMode.zone6Active then
+        for spawn_loc_name, mirana in pairs(GameMode.spawns[6]["miranas"]) do
+            mirana:ForceKill(false)
+            mirana.active = false
         end
         GameMode.zone6Active = false
     end
