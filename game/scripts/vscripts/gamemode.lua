@@ -232,7 +232,7 @@ function GameMode:OnAllPlayersLoaded()
         heroEntity:SetAbsOrigin(startPosition)
 
         --[[--for testing
-        local startEnt = Entities:FindByName(nil, "respawn_checkpoint_3")
+        local startEnt = Entities:FindByName(nil, "respawn_checkpoint_5")
         -- GetAbsOrigin() is a function that can be called on any entity to get its location
         local startPosition = startEnt:GetAbsOrigin()
         heroEntity:SetAbsOrigin(startPosition)]]
@@ -308,6 +308,7 @@ function GameMode:OnHeroInGame(hero)
   GameMode.playerEnts[hero:GetPlayerID()]["zoneTriggered"] = {}
   GameMode.playerEnts[hero:GetPlayerID()]["zoneTriggered"][1] = false
   GameMode.playerEnts[hero:GetPlayerID()]["zoneTriggered"][2] = false
+  GameMode.playerEnts[hero:GetPlayerID()]["zoneTriggered"][2.2] = false
   GameMode.playerEnts[hero:GetPlayerID()]["zoneTriggered"][3] = false
   GameMode.playerEnts[hero:GetPlayerID()]["zoneTriggered"][4] = false
   GameMode.playerEnts[hero:GetPlayerID()]["zoneTriggered"][5] = false
@@ -367,7 +368,7 @@ function GameMode:InitGameMode()
   
   GameMode.playerEnts = {}
   GameMode.spawns = {}
-  GameMode.spawns[2] = {}
+  GameMode.spawns[2.2] = {}
   GameMode.spawns[3] = {}
   GameMode.spawns[3]["pudges"] = {}
   GameMode.spawns[4] = {}
@@ -378,7 +379,7 @@ function GameMode:InitGameMode()
   GameMode.spawns[5]["harpy_scouts"] = {}
   GameMode.spawns[5]["ghosts"] = {}
   GameMode.spawns[6] = {}
-  GameMode.spawns[6]["zombies"] = {}
+  GameMode.spawns[6]["miranas"] = {}
   GameMode.spawns[7] = {}
   GameMode.spawns[7]["linas"] = {}
   GameMode.spawns[8] = {}
@@ -387,7 +388,7 @@ function GameMode:InitGameMode()
   GameMode.linaCounter = 1000000
   GameMode.currentLap = 0
 
-  GameMode.zone2Active = false
+  GameMode.zone2_2Active = false
   GameMode.zone3Active = false
   GameMode.zone4Active = false
   GameMode.zone5Active = false
@@ -461,8 +462,10 @@ function GameMode:SpawnKardel(spawn_loc_name)
   spawnedUnit.castEntitySet = 0
   spawnedUnit:AddNewModifier(nil, nil, "modifier_invulnerable", {})
   spawnedUnit:SetThink("KardelThinker", self)
-  self.spawns[2]["kardel"] = spawnedUnit
+  self.spawns[2.2]["kardel"] = spawnedUnit
 end
+
+
 
 function GameMode:SpawnPudge(spawn_loc_name)
   local spawnEnt = Entities:FindByName(nil, spawn_loc_name)
@@ -474,16 +477,15 @@ function GameMode:SpawnPudge(spawn_loc_name)
 end
 
 --for future version
---[[function GameMode:SpawnMirana(spawn_loc_name, orientation, order)
+function GameMode:SpawnMirana(spawn_loc_name)
   local spawnEnt = Entities:FindByName(nil, spawn_loc_name)
   local spawnVector = spawnEnt:GetAbsOrigin()
   local spawnedUnit = CreateUnitByName("mirana", spawnVector, true, nil, nil, DOTA_TEAM_BADGUYS)
   --spawnedUnit:SetAngles(0, 0, 0)
   spawnedUnit:AddNewModifier(nil, nil, "modifier_invulnerable", {})
-  spawnedUnit.orientation = orientation
-  spawnedUnit.order = order
   spawnedUnit:SetThink("MiranaThinker", self)
-end]]
+  self.spawns[6]["miranas"][spawn_loc_name] = spawnedUnit
+end
 
 function GameMode:SpawnEarthshaker(spawn_loc_name, orientation)
   local spawnEnt = Entities:FindByName(nil, spawn_loc_name)
@@ -522,15 +524,35 @@ function GameMode:SpawnDrow(spawn_loc_name)
   GameMode.spawns[5]["drows"][spawn_loc_name] = spawnedUnit 
 end
 
-function GameMode:SpawnZombie(spawn_loc_name, position)
+function GameMode:SpawnTouchMe(spawn_loc_name, orientation)
   local spawnEnt = Entities:FindByName(nil, spawn_loc_name)
   local spawnVector = spawnEnt:GetAbsOrigin()
-  local spawnedUnit = CreateUnitByName("Touch Me", spawnVector, true, nil, nil, DOTA_TEAM_BADGUYS)
+  local spawnedUnit = CreateUnitByName("Touch Me 2", spawnVector, true, nil, nil, DOTA_TEAM_BADGUYS)
+  -- set the angle it's facing
+  -- (0, 0, 0) = faces to the endzone (to the right)
+  --(pitch (100 = facing down), yaw (100 = facing left), roll (0 = normal))
+  if orientation == "right" then
+    spawnedUnit:SetAngles(0, 0, 0)
+  elseif orientation == "down" then
+    spawnedUnit:SetAngles(0, 270, 0)
+  end
   spawnedUnit.spawn_loc_name = spawn_loc_name
-  spawnedUnit.position = position
+  spawnedUnit.orientation = orientation
+  spawnedUnit.spawnVector = spawnVector
   spawnedUnit.active = true
-  spawnedUnit:SetThink("ZombieThinker", self)
-  GameMode.spawns[6]["zombies"][spawn_loc_name] = spawnedUnit
+  spawnedUnit:SetThink("TouchMeThinker", self)
+  GameMode.spawns[6]["touch_mes"][spawn_loc_name] = spawnedUnit
+end
+
+function GameMode:SpawnInvoker(spawn_loc_name)
+  local spawnEnt = Entities:FindByName(nil, spawn_loc_name)
+  local spawnVector = spawnEnt:GetAbsOrigin()
+  local spawnedUnit = CreateUnitByName("invoker", spawnVector, true, nil, nil, DOTA_TEAM_BADGUYS)
+  local abil = spawnedUnit:FindAbilityByName("exort_custom")
+  abil:OnSpellStart()
+  spawnedUnit:AddNewModifier(nil, nil, "modifier_invulnerable", {})
+  spawnedUnit:SetThink("InvokerThinker", self)
+  self.spawns[6]["invoker"] = spawnedUnit
 end
 
 function GameMode:SpawnFeedMe(playerID)
@@ -593,7 +615,6 @@ end
 function GameMode:KardelThinker(unit)
   local abil = unit:FindAbilityByName("shrapnel_custom")
   --version 4
-  
   --[[local pos = unit:GetAbsOrigin()
   math.randomseed(GameRules:GetGameTime())
   local randomNumber = math.random(1, 2)
@@ -623,13 +644,23 @@ function GameMode:KardelThinker(unit)
   math.randomseed(GameRules:GetGameTime())
   local randomNumber = math.random(1, 3)
   local castEnt = Entities:FindByName(nil, string.format("shrapnel_entity_%s", unit.castEntitySet * 3 + randomNumber))
+
   unit.castEntitySet = unit.castEntitySet + 1
   if unit.castEntitySet == 6 then
     unit.castEntitySet = 0
   end
   local castPos = castEnt:GetAbsOrigin()
   unit:CastAbilityOnPosition(castPos, abil, -1)
-  return 1
+  local signifier = "particles/econ/items/invoker/invoker_apex/invoker_sun_strike_beam_immortal1.vpcf"
+  local dummy = CreateUnitByName("npc_dummy_unit", castPos, true, nil, nil, DOTA_TEAM_GOODGUYS)
+  dummy:FindAbilityByName("dummy_unit"):SetLevel(1)
+  --dummy:AddNewModifier(dummy, nil, "modifier_phased", {})
+  --ParticleManager:CreateParticle( "particles/econ/items/invoker/invoker_apex/invoker_sun_strike_beam_immortal1.vpcf", PATTACH_ABSORIGIN, castEnt)
+  --ParticleManager:SetParticleControl( unit.nFXIndex, 1, Vector( 0, 0, 0 ) )
+  --unit:AddParticle( self.nFXIndex, false, false, -1, false, false )
+  local beacon = ParticleManager:CreateParticle(signifier, PATTACH_ABSORIGIN, dummy)
+  ParticleManager:SetParticleControl(beacon, 0, castPos)
+  return 1.5
 end
 
 
@@ -640,18 +671,19 @@ function GameMode:PudgeThinker(unit)
   local pos = unit:GetAbsOrigin()
   local r = 1000
   if unit:IsAlive() then
-    local anglerad = math.rad(RandomFloat(75, 110))
+    local anglerad = math.rad(RandomFloat(75, 105))
     local castpos = Vector(pos.x + r*math.cos(anglerad), pos.y + r*math.sin(anglerad), pos.z)
     unit:CastAbilityOnPosition(castpos, abil, -1)
     math.randomseed(GameRules:GetGameTime())
-    return RandomFloat(1, 3)
+    return RandomFloat(4, 6)
   else
     return nil
   end
 end
 
---This function is the thinker for mirana to randomly and periodically arrow
---[[function GameMode:MiranaThinker(unit)
+--past version
+--[[--This function is the thinker for mirana to randomly and periodically arrow
+function GameMode:MiranaThinker(unit)
   print("Thinker has started on mirana (", unit:GetEntityIndex(), ")")
   --unit:SetForwardVector(Vector(0, -1, 0))
   local abil = unit:FindAbilityByName("mirana_arrow_custom")
@@ -719,6 +751,14 @@ end
     end
   end)
 end]]
+
+function GameMode:MiranaThinker(unit)
+  local abil = unit:FindAbilityByName("mirana_arrow_custom")
+  local pos = unit:GetAbsOrigin()
+  local castpos = Vector(pos.x + 100, pos.y, pos.z)
+  unit:CastAbilityOnPosition(castpos, abil, -1)
+  return 2
+end
 
 --This function is the thinker for earthshaker to randomly and periodically fissure
 function GameMode:EarthshakerThinker(unit)
@@ -823,7 +863,8 @@ function GameMode:NeutralThinker(unit)
   end
 end
 
---This function is the thinker for the zombies to patrol 
+--version 4_2
+--[[--This function is the thinker for the zombies to patrol 
 function GameMode:ZombieThinker(unit)
   local pos = unit:GetAbsOrigin()
   local waypoint1Ent = Entities:FindByName(nil, string.format("waypoint%s_1", unit.position))
@@ -852,7 +893,53 @@ function GameMode:ZombieThinker(unit)
     --stop the thinker
     return nil
   end
+end]]
+
+--version 4_3
+--This function is the thinker for the touch mes
+function GameMode:TouchMeThinker(unit)
+  if not unit.active then
+    --stop the thinker
+    return nil
+  elseif unit:IsAlive() then
+    --[[if unit:GetAbsOrigin() ~= unit.spawnVector then
+      unit:SetAbsOrigin(unit.spawnVector)
+    end]]
+    return 1
+  else
+    --spawn new creep
+    Timers:CreateTimer({
+      endTime = 5, -- when this timer should first execute, you can omit this if you want it to run first on the next frame
+      callback = function()
+        GameMode:SpawnTouchMe(unit.spawn_loc_name, unit.orientation)
+      end
+    })
+    --stop the thinker
+    return nil
+  end
 end
+
+--[[function GameMode:InvokerThinker(unit)
+  local abil = unit:FindAbilityByName("sun_strike_custom")
+  math.randomseed(GameRules:GetGameTime())
+  --local randomNumber = math.random(1, 3)
+  --random float of x between top left and top right
+  --random float of y between top left and bottom left
+  local topLeftEnt = Entities:FindByName(nil, "sun_strike_entity_top_left")
+  local topLeftVector = topLeftEnt:GetAbsOrigin()
+  local topRightEnt = Entities:FindByName(nil, "sun_strike_entity_top_right")
+  local topRightVector = topRightEnt:GetAbsOrigin()
+  local bottomLeftEnt = Entities:FindByName(nil, "sun_strike_entity_bottom_left")
+  local bottomLeftVector = bottomLeftEnt:GetAbsOrigin()
+  local castPos = Vector(RandomFloat(topLeftVector.x, topRightVector.x), RandomFloat(bottomLeftVector.y, topLeftVector.y), 128)
+  --test
+  --local castPos = topLeftEnt:GetAbsOrigin()
+  print(tostring(castPos))
+  print(tostring(abil:GetAbilityName()))
+  unit:CastAbilityOnPosition(castPos, abil, -1)
+  return 1
+end]]
+
 
 --This function is the thinker for the feed me! creep
 function GameMode:FeedMeThinker(unit)
@@ -884,13 +971,13 @@ function GameMode:LinaThinker(unit)
     return nil
   elseif unit:IsAlive() then
   --in case it gets moved due to something like cookie
-    if unit:GetAbsOrigin() ~= unit.spawnVector then
+    --[[if unit:GetAbsOrigin() ~= unit.spawnVector then
       unit:SetAbsOrigin(unit.spawnVector)
-    end
+    end]]
     local light_strike_array = unit:GetAbilityByIndex(0)
     local pos = unit:GetAbsOrigin()
     unit:CastAbilityOnPosition(pos, light_strike_array, -1)
-    local repel = unit:GetAbilityByIndex(1)
+    --[[local repel = unit:GetAbilityByIndex(1)
     if unit.repelCast == false then
       unit:CastAbilityOnTarget(unit, repel, -1)
       unit.repelCast = true
@@ -899,7 +986,8 @@ function GameMode:LinaThinker(unit)
     if self.linaCounter == 0 then
       unit.repelCast = false
     end
-    return 1
+    return 0.5]]
+    return 2
   else
     --spawn new creep
     Timers:CreateTimer({
@@ -912,6 +1000,28 @@ function GameMode:LinaThinker(unit)
     return nil
   end
 end
+
+
+--[[function GameMode:LinaThinker(unit)
+  local abil = unit:FindAbilityByName("lina_light_strike_array_custom")
+  math.randomseed(GameRules:GetGameTime())
+  --local randomNumber = math.random(1, 3)
+  --random float of x between top left and top right
+  --random float of y between top left and bottom left
+  local topLeftEnt = Entities:FindByName(nil, "sun_strike_entity_top_left")
+  local topLeftVector = topLeftEnt:GetAbsOrigin()
+  local topRightEnt = Entities:FindByName(nil, "sun_strike_entity_top_right")
+  local topRightVector = topRightEnt:GetAbsOrigin()
+  local bottomLeftEnt = Entities:FindByName(nil, "sun_strike_entity_bottom_left")
+  local bottomLeftVector = bottomLeftEnt:GetAbsOrigin()
+  local castPos = Vector(RandomFloat(topLeftVector.x, topRightVector.x), RandomFloat(bottomLeftVector.y, topLeftVector.y), 128)
+  --test
+  --local castPos = topLeftEnt:GetAbsOrigin()
+  print(tostring(castPos))
+  print(tostring(abil:GetAbilityName()))
+  unit:CastAbilityOnPosition(castPos, abil, -1)
+  return 1
+end]]
 
 
 function GameMode:UltCreepThinker(unit)

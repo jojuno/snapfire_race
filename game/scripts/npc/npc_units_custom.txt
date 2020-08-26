@@ -325,8 +325,8 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"250"		// Damage range min.
-		"AttackDamageMax"			"400"		// Damage range max.
+		"AttackDamageMin"			"500"		// Damage range min.
+		"AttackDamageMax"			"500"		// Damage range max.
 		"AttackRate"				"1.6"		// Speed of attack.
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"600"		// Range within a target can be acquired.
@@ -474,8 +474,8 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"50"		// Damage range min.
-		"AttackDamageMax"			"100"		// Damage range max.
+		"AttackDamageMin"			"25"		// Damage range min.
+		"AttackDamageMax"			"50"		// Damage range max.
 		"AttackRate"				"1.6"		// Speed of attack.
 		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"500"		// Range within a target can be acquired.
@@ -501,7 +501,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"800"		// Base health.
+		"StatusHealth"				"500"		// Base health.
 		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
 		"StatusMana"				"0"		// Base mana.
 		"StatusManaRegen"			"1"		// Mana regeneration rate.		 
@@ -547,8 +547,8 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"50"		// Damage range min.
-		"AttackDamageMax"			"100"		// Damage range max.
+		"AttackDamageMin"			"24"		// Damage range min.
+		"AttackDamageMax"			"50"		// Damage range max.
 		"AttackRate"				"1.0"		// Speed of attack.
 		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"300"		// Range within a target can be acquired.
@@ -574,7 +574,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"1000"		// Base health.
+		"StatusHealth"				"500"		// Base health.
 		"StatusHealthRegen"			"30"		// Health regeneration rate.
 		"StatusMana"				"400"		// Base mana.
 		"StatusManaRegen"			"1.0"		// Mana regeneration rate.		 
@@ -820,7 +820,7 @@
     // Abilities
     //----------------------------------------------------------------
     "Ability1"              "mirana_arrow_custom"
-    "Ability3"              ""
+    "Ability3"              "patrol_unit_passive"
     "Ability4"              ""
 
     // Movement
@@ -1174,6 +1174,49 @@
     //"UnitRelationshipClass"             "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
   	}
 
+	//=================================================================================
+	// Neutral: Ancient - Small Thunder Lizard
+	//=================================================================================
+	"Touch Me 2"
+	{										
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/creeps/neutral_creeps/n_creep_thunder_lizard/n_creep_thunder_lizard_small.vmdl"	// Model.
+    	"BaseClass"             "npc_dota_creature"
+		"SoundSet"					"n_creep_Ranged"
+		"Level"						"5"
+		"IsAncient"					"1"
+		"ModelScale" 					".65"
+
+		// Status
+		"StatusHealth"				"99999"		// Base health.
+		"StatusHealthRegen"			"1000"		// Health regeneration rate.
+
+		// Abilities
+		//----------------------------------------------------------------
+    	"Ability1"              "patrol_unit_passive"
+    	"Ability2"              "kill_radius"
+		//"Ability3"				"centaur_retaliate_custom"
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"              "0"
+		"BoundsHullName"          "DOTA_HULL_SIZE_SMALL"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"              "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"             "350"
+		"MovementTurnRate"        "5" 
+		
+		// Team
+		//----------------------------------------------------------------
+		//"TeamName"                  "DOTA_TEAM_BADGUYS"
+		//"CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		//"CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		//"UnitRelationshipClass"             "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+	}
+
 	
 	"Feed Me!"
     {
@@ -1218,7 +1261,7 @@
     //----------------------------------------------------------------
     "Ability1"              "lina_light_strike_array_custom"
     "Ability2"              "negative_status_resistance"
-    "Ability3"              "lina_statue"
+    "Ability3"              "patrol_unit_passive"
 
 
     // Movement
@@ -1250,6 +1293,183 @@
                 {
 					//"Lina's Dress"
                     "ItemDef" "321"
+                }
+            }
+        }
+    }
+
+	"npc_dummy_unit"
+  {
+    // General
+    //----------------------------------------------------------------
+    "BaseClass"         "npc_dota_base_additive"  // Class of entity of link to.
+    "Model"           "models/development/invisiblebox.vmdl"  // Model.
+    "SoundSet"          "Creep_Good_Range"          // Name of sound set.
+    "Level"           "0"
+    "UnitLabel"         "healing_ward"
+    
+    // Abilities
+    //----------------------------------------------------------------
+    
+    "Ability1"          "dummy_unit"     // Ability 1.
+    "Ability2"          ""      // Ability 2.
+    "Ability3"          ""      // Ability 3.
+    "Ability4"          ""      // Ability 4.
+    "Ability5"          ""      // Ability 5.
+    "Ability6"          ""      // Ability 6 - Extra.
+    "Ability7"          ""      // Ability 7 - Extra.
+    "Ability8"          ""      // Ability 8 - Extra.
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"       "0"     // Physical protection.
+    "MagicalResistance"       "0"     // Magical protection.
+
+    // Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"     // Type of attack - melee, ranged, etc.
+    "AttackDamageMin"     "0"     // Damage range min.
+    "AttackDamageMax"     "0"     // Damage range max.
+    "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"        "1"     // Speed of attack.
+    "AttackAnimationPoint"    "0.5"   // Normalized time in animation cycle to attack.
+    "AttackAcquisitionRange"  "800"   // Range within a target can be acquired.
+    "AttackRange"       "500"   // Range within a target can be attacked.
+    "ProjectileModel"     "" // Particle system model for projectile.
+    "ProjectileSpeed"     "900"   // Speed of projectile.
+
+    // Attributes
+    //----------------------------------------------------------------
+    "AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
+    "AttributeBaseStrength"   "0"     // Base strength
+    "AttributeStrengthGain"   "0"     // Strength bonus per level.
+    "AttributeBaseIntelligence" "0"     // Base intelligence
+    "AttributeIntelligenceGain" "0"     // Intelligence bonus per level.
+    "AttributeBaseAgility"    "0"     // Base agility
+    "AttributeAgilityGain"    "0"     // Agility bonus per level.
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"          "0"     // Experience earn.
+    "BountyGoldMin"       "0"     // Gold earned min.
+    "BountyGoldMax"       "0"     // Gold earned max.
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"      "DOTA_HULL_SIZE_SMALL"      // Hull type used for navigation/locomotion.
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"     // Type of locomotion - ground, air
+    "MovementSpeed"       "450"   // Speed
+    "MovementTurnRate"      "1.0"   // Turning rate.
+    "FollowRange"       "250"   // Distance to keep when following
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"        "1"     // Base health.
+    "StatusHealthRegen"     "0"     // Health regeneration rate.
+    "StatusMana"        "0"     // Base mana.
+    "StatusManaRegen"     "0"     // Mana regeneration rate.
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"          "DOTA_TEAM_GOODGUYS"      // Team name.
+    "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+    "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_SOFT"
+    "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
+    
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"    "0"   // Range of vision during day light.
+    "VisionNighttimeRange"    "0"   // Range of vision at night time.
+
+    // Bots
+    //----------------------------------------------------------------
+    "AttackDesire"        "1.5"   // How much bots want to attack them vs other non-hero things
+  
+    "HasInventory"                "1"
+  } 
+
+  //========================================================================================================================
+// Dummy stuff
+//========================================================================================================================
+  
+  "dummy_unit"
+  {
+    "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"            "rubick_empty1"
+    "MaxLevel"                      "1"
+    
+    "Modifiers"
+    {
+      "dummy_unit"
+      {
+          "Passive"                        "1"
+          "IsHidden"                        "1"    
+          "States"
+          {
+              "MODIFIER_STATE_UNSELECTABLE" "MODIFIER_STATE_VALUE_ENABLED"
+              "MODIFIER_STATE_INVULNERABLE"    "MODIFIER_STATE_VALUE_ENABLED"
+              "MODIFIER_STATE_NOT_ON_MINIMAP" "MODIFIER_STATE_VALUE_ENABLED"
+              "MODIFIER_STATE_NO_HEALTH_BAR"  "MODIFIER_STATE_VALUE_ENABLED"
+          }
+      }
+    }
+  }
+
+	"invoker"
+    {
+    // General
+    //----------------------------------------------------------------
+    "BaseClass"                     "npc_dota_creature"
+	//base model
+	//add garments with "AttachWearables"
+    "Model"                         "models/heroes/invoker/invoker.vmdl"
+    "ModelScale"                    "1"
+
+    // Abilities
+    //----------------------------------------------------------------
+    "Ability1"              "sun_strike_custom"
+	"Ability2"              "exort_custom"
+    "Ability3"              "patrol_unit_passive"
+    "Ability4"              ""
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
+    "MovementSpeed"           "150"   
+    "MovementTurnRate"        "5" 
+
+    "Creature"
+        {
+            "AttachWearables"
+            {
+                "Wearable1"
+                {
+					//"Invoker's Cape"
+                    "ItemDef" "48"
+                }
+                "Wearable2"
+                {
+					//"Invoker's Shoulder"
+                    "ItemDef" "89"
+                }
+                "Wearable3"
+                {
+					//"Invoker's Head"
+                    "ItemDef" "98"
+                }
+                "Wearable4"
+                {
+					//"Invoker's Hair"
+                    "ItemDef" "99"
+                }
+                "Wearable5"
+                {
+					//"Invoker's Bracer"
+                    "ItemDef" "100"
                 }
             }
         }

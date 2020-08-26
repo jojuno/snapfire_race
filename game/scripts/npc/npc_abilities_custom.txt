@@ -901,6 +901,51 @@
 		}
 	}
 
+	//=================================================================================================================
+	// Ability: Snapfire Special Bonus (Bonus Mortimer Kisses Launched)
+	//=================================================================================================================
+  	"special_bonus_unique_snapfire_1"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"						"6485"	// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityType"				"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"0"
+				"ad_linked_ability"			"snapfire_mortimer_kisses"				// this is the ability this bonus affects.  This line is required for Ability Draft to correctly choose talents.
+			}
+		}
+	}
+
+	
+ 	//=================================================================================================================
+	// Ability: Snapfire Special Bonus
+	//=================================================================================================================
+  	"special_bonus_unique_snapfire_2"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"						"6487"	// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityType"				"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"value"				"0" // bonus Armor Shredder armor reduction
+				"ad_linked_ability"			"snapfire_lil_shredder"				// this is the ability this bonus affects.  This line is required for Ability Draft to correctly choose talents.
+			}
+		}
+	}
+
     //=================================================================================================================
 	// Ability: Snapfire Special Bonus
 	//=================================================================================================================
@@ -917,8 +962,118 @@
 			"01"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"value"				"2.5" // shotgun disarm
+				"value"				"0" // shotgun disarm
 				"ad_linked_ability"			"snapfire_scatterblast"				// this is the ability this bonus affects.  This line is required for Ability Draft to correctly choose talents.
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Snapfire Special Bonus
+	//=================================================================================================================
+  	"special_bonus_unique_snapfire_4"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"						"6490"	// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityType"				"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"0" // Lizard Blobs Movement Slow
+				"ad_linked_ability"			"snapfire_mortimer_kisses"				// this is the ability this bonus affects.  This line is required for Ability Draft to correctly choose talents.
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Snapfire Special Bonus
+	//=================================================================================================================
+  	"special_bonus_unique_snapfire_5"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"						"6479"	// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityType"				"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"0" // Cookie Restores Health
+				"ad_linked_ability"			"snapfire_firesnap_cookie"				// this is the ability this bonus affects.  This line is required for Ability Draft to correctly choose talents.
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Snapfire Special Bonus
+	//=================================================================================================================
+	"special_bonus_unique_snapfire_6"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"						"382"	// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityType"				"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"0" // Mounted Turret Uses Your Attack
+				"ad_linked_ability"			"snapfire_lil_shredder"				// this is the ability this bonus affects.  This line is required for Ability Draft to correctly choose talents.
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Snapfire Special Bonus (Bonus Scatterblast Damage)
+	//=================================================================================================================
+	"special_bonus_unique_snapfire_7"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"						"384"	// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityType"				"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"0"
+				"ad_linked_ability"			"snapfire_scatterblast"				// this is the ability this bonus affects.  This line is required for Ability Draft to correctly choose talents.
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Snapfire Special Bonus (Bonus Scatterblast Damage)
+	//=================================================================================================================
+	"special_bonus_unique_snapfire_8"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"						"500"	// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityType"				"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"0"
+				"ad_linked_ability"			"snapfire_lil_shredder"				// this is the ability this bonus affects.  This line is required for Ability Draft to correctly choose talents.
 			}
 		}
 	}
@@ -943,7 +1098,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"movespeed_slow"		"-60"
+				"movespeed_slow"		"-30"
 			}
 			"02"
 			{
@@ -1023,7 +1178,7 @@
 		"01"
 		{
 			"var_type"        "FIELD_FLOAT"
-			"hook_speed"      "1800.0"
+			"hook_speed"      "2100.0"
 		}
 		"02"
 		{
@@ -1070,7 +1225,7 @@
 			"01"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"arrow_speed"		"1200.0"
+				"arrow_speed"		"600.0"
 			}
 			"02"
 			{
@@ -1081,7 +1236,7 @@
 			{
 				"var_type"			"FIELD_INTEGER"
 				//this decides the length of the arrow
-				"arrow_range"		"3000"
+				"arrow_range"		"5000"
 			}
 			"04"
 			{
@@ -1091,17 +1246,17 @@
 			"05"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"arrow_min_stun"	"0.01"
+				"arrow_min_stun"	"0.5"
 			}
 			"06"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"arrow_max_stun"	"3 3.5 4 4.5"
+				"arrow_max_stun"	"1"
 			}
 			"07"
 			{
 				"var_type"			"FIELD_INTEGER"
-				"arrow_bonus_damage"	"500"
+				"arrow_bonus_damage"	"0"
 			}
 			"08"
 			{
@@ -1126,7 +1281,7 @@
 		"AbilityCastPoint"        "0.3"
 		"AbilityCooldown"        "0"
 		"AbilityManaCost"        "0"
-		"AbilityDamage"          "800"
+		"AbilityDamage"          "0"
 
 		// Special
 		//-------------------------------------------------------------------------------------------------------------
@@ -1163,7 +1318,7 @@
 		"AbilityTextureName"      "sniper_shrapnel"
 
 		//this determines the length of the fissure
-		"AbilityCastRange"        "5000"
+		"AbilityCastRange"        "20000"
 		"AbilityCastPoint"        "0.3"
 		"AbilityCharges"				"10"
 		"AbilityChargeRestoreTime"		"1"
@@ -1177,7 +1332,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"slow_movement_speed"	"0"
+				"slow_movement_speed"	"-30"
 				"LinkedSpecialBonus"	"special_bonus_unique_sniper_5"
 			}
 			"02"
@@ -1188,7 +1343,7 @@
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"shrapnel_damage"		"1000"
+				"shrapnel_damage"		"0"
 				"LinkedSpecialBonus"	"special_bonus_unique_sniper_1"
 			}
 			"04"
@@ -1199,12 +1354,12 @@
 			"05"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"damage_delay"			"1"
+				"damage_delay"			"2"
 			}
 			"06"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"slow_duration"			"0"
+				"slow_duration"			"1"
 			}
 		}
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
@@ -1240,7 +1395,7 @@
 			"01"
 			{
 				"var_type"			"FIELD_INTEGER"
-				"aura_radius"		"800"
+				"aura_radius"		"600"
 			}
 			"02"
 			{
@@ -1269,7 +1424,7 @@
 		"BaseClass"                 "ability_datadriven"
 		"AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE" // | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_ALL"
-		"AbilityTextureName"        "patrol"
+		"AbilityTextureName"        ""
 
 		// "Modifiers"
 		"Modifiers"
@@ -1285,6 +1440,78 @@
 				"MODIFIER_STATE_UNSELECTABLE"        "MODIFIER_STATE_VALUE_ENABLED"
 				"MODIFIER_STATE_NO_UNIT_COLLISION"   "MODIFIER_STATE_VALUE_ENABLED"
 				}
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Invoker: Sun Strike
+	//=================================================================================================================
+	//===========================================================================================
+	"sun_strike_custom"
+	{
+		"BaseClass"                 "invoker_sun_strike"
+		"AbilityTextureName"      "invoker_sun_strike"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES"
+		"AbilityUnitDamageType"      "DAMAGE_TYPE_PURE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"FightRecapLevel"				"1"
+		"AbilitySound"					"Hero_Invoker.SunStrike.Charge"
+
+		"AbilityCastRange"				"10000"
+		"AbilityCastPoint"				"0.05"
+		"AbilityCastAnimation"			"ACT_INVALID"
+		"AbilityCooldown"				"0"
+		"AbilityManaCost"				"0"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"delay"					"1.7"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"area_of_effect"		"175"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage"				"10000"
+				"levelkey"				"exortlevel"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Invoker: Exort
+	//=================================================================================================================
+	"exort_custom"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"                 "invoker_exort"
+		"AbilityTextureName"      	"invoker_exort"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"MaxLevel"						"7"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0"
+		"AbilityManaCost"				"0"
+		"AbilityCastAnimation"			"ACT_INVALID"
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_damage_per_instance"	"2 6 10 14 18 22 26"
 			}
 		}
 	}
@@ -1381,12 +1608,12 @@
 			"01"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"fiery_soul_on_kill_attack_speed_bonus"	"30"
+				"fiery_soul_on_kill_attack_speed_bonus"	"50"
 			}
 			"02"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"fiery_soul_on_kill_move_speed_bonus"	"10"
+				"fiery_soul_on_kill_move_speed_bonus"	"20"
 			}
 			"03"
 			{
@@ -1422,7 +1649,7 @@
 
 		// Time		
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"4"
+		"AbilityCooldown"				"3"
 
 		// Cost
 		//-------------------------------------------------------------------------------------------------------------
@@ -1435,7 +1662,7 @@
 			"01"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"wave_speed"		"2000.0"
+				"wave_speed"		"1500.0"
 			}
 			"02"
 			{
@@ -1445,12 +1672,12 @@
 			"03"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"silence_duration"	"2"
+				"silence_duration"	"1"
 			}
 			"04"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"knockback_distance_max"	"400"
+				"knockback_distance_max"	"200"
 			}
 			"05"
 			{
@@ -1513,7 +1740,7 @@
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"status_resistance"		"-175"
+				"status_resistance"		"-400"
 			}
 			"03"
 			{
@@ -1540,7 +1767,7 @@
 		"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitDamageType"      "DAMAGE_TYPE_PURE"
 
-		"AbilityCastRange"				"625"
+		"AbilityCastRange"				"10000"
 		"AbilityCastPoint"				"0.45 0.45 0.45 0.45"
 		
 		// Time		
@@ -1558,7 +1785,7 @@
 			"01"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"light_strike_array_aoe"	"350"
+				"light_strike_array_aoe"	"400"
 			}
 			
 			"02"
@@ -1570,12 +1797,12 @@
 			"03"
 			{
 				"var_type"						"FIELD_FLOAT"
-				"light_strike_array_stun_duration"	"0"
+				"light_strike_array_stun_duration"	"1.5"
 			}
 			"04"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"light_strike_array_damage"	"10000"
+				"light_strike_array_damage"	"0"
 				"LinkedSpecialBonus"		"special_bonus_unique_lina_3"
 			}
 		}

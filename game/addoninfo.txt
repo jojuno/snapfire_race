@@ -1,9 +1,9 @@
 "AddonInfo"
 {
   "TeamCount" "8"
-  "maps"      "race_draft_4_1"
+  "maps"      "race_draft_4_4"
   "IsPlayable"  "1"
-  "race_draft_4_1"
+  "race_draft_4_4"
   {
           "MaxPlayers"                    "8"
   }
