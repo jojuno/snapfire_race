@@ -519,7 +519,7 @@ function GameMode:SpawnDrow(spawn_loc_name)
   spawnedUnit.spawnVector = spawnVector 
   spawnedUnit.active = true
   spawnedUnit:AddNewModifier(nil, nil, "modifier_ai_drow", { aggroRange = 700, leashRange = leash_range });
-  spawnedUnit:AddNewModifier(nil, nil, "modifier_magic_immune", {})
+  --spawnedUnit:AddNewModifier(nil, nil, "modifier_magic_immune", {})
   spawnedUnit:SetThink("DrowThinker", self)
   GameMode.spawns[5]["drows"][spawn_loc_name] = spawnedUnit 
 end

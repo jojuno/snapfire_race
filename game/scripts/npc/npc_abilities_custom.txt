@@ -383,7 +383,7 @@
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"jump_height"			"500" //"228 257 285 314" // proportional to horizontal distance
+				"jump_height"			"400" //"228 257 285 314" // proportional to horizontal distance
 			}
 			"05"
 			{
@@ -1677,7 +1677,7 @@
 			"04"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"knockback_distance_max"	"200"
+				"knockback_distance_max"	"400"
 			}
 			"05"
 			{

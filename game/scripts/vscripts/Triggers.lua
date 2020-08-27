@@ -162,10 +162,10 @@ function Checkpoint5Trigger(trigger)
     end
 
     if not GameMode.zone5Active then
-        for i = 1, 4 do
+        --[[for i = 1, 4 do
             local spawn_loc_name = string.format("spawn_phoenix_%s", i)
             GameMode:SpawnPhoenix(spawn_loc_name)
-        end
+        end]]
       
         --[[for i = 1, 10 do
             local spawn_loc_name = string.format("spawn_harpy_%s", i)
