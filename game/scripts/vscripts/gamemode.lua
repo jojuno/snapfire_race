@@ -129,7 +129,7 @@ function GameMode:OnAllPlayersLoaded()
 
     --starting message
     if delta == 29 then
-      Notifications:TopToAll({text="Pregame: Bang 'em up to seed first!" , duration= 5.0, style={["font-size"] = "45px", color = "red"}})
+      Notifications:TopToAll({text="Pregame: Bang 'em up to seed first!" , duration= 20, style={["font-size"] = "45px", color = "red"}})
       return 1
 
     elseif delta > 9 then
@@ -230,12 +230,6 @@ function GameMode:OnAllPlayersLoaded()
         -- GetAbsOrigin() is a function that can be called on any entity to get its location
         local startPosition = startEnt:GetAbsOrigin()
         heroEntity:SetAbsOrigin(startPosition)
-
-        --[[--for testing
-        local startEnt = Entities:FindByName(nil, "respawn_checkpoint_5")
-        -- GetAbsOrigin() is a function that can be called on any entity to get its location
-        local startPosition = startEnt:GetAbsOrigin()
-        heroEntity:SetAbsOrigin(startPosition)]]
 
         --set camera to hero because when the hero is relocated, the camera stays still
         --use global variable 'PlayerResource' to call the function
@@ -519,7 +513,6 @@ function GameMode:SpawnDrow(spawn_loc_name)
   spawnedUnit.spawnVector = spawnVector 
   spawnedUnit.active = true
   spawnedUnit:AddNewModifier(nil, nil, "modifier_ai_drow", { aggroRange = 700, leashRange = leash_range });
-  --spawnedUnit:AddNewModifier(nil, nil, "modifier_magic_immune", {})
   spawnedUnit:SetThink("DrowThinker", self)
   GameMode.spawns[5]["drows"][spawn_loc_name] = spawnedUnit 
 end
@@ -680,77 +673,6 @@ function GameMode:PudgeThinker(unit)
     return nil
   end
 end
-
---past version
---[[--This function is the thinker for mirana to randomly and periodically arrow
-function GameMode:MiranaThinker(unit)
-  print("Thinker has started on mirana (", unit:GetEntityIndex(), ")")
-  --unit:SetForwardVector(Vector(0, -1, 0))
-  local abil = unit:FindAbilityByName("mirana_arrow_custom")
-  local pos = unit:GetAbsOrigin()
-  local r = 1000
-  Timers:CreateTimer(1, function()
-    if IsValidEntity(unit) then
-      --first or not
-      if unit.order == "first" then
-        --left or right side
-        if unit.orientation == "left" then
-          --calculates in circles
-          --math.rad converts degrees into radians
-          --circle = 2pi
-          local anglerad = math.rad(RandomFloat(270, 315))
-          --pos.y + r*math.sin to point downward across the path
-          local castpos = Vector(pos.x + r*math.cos(anglerad), pos.y + r*math.sin(anglerad), pos.z)
-          unit:CastAbilityOnPosition(castpos, abil, -1)
-          return 8
-        else
-          local anglerad = math.rad(RandomFloat(45, 90))
-          --pos.y + r*math.sin to point upward across the path
-          local castpos = Vector(pos.x + r*math.cos(anglerad), pos.y + r*math.sin(anglerad), pos.z)
-          unit:CastAbilityOnPosition(castpos, abil, -1)
-          return 9
-        end
-      elseif unit.order == "rest" then
-        --left or right side
-        if unit.orientation == "left" then
-          --calculates in circles
-          local anglerad = math.rad(RandomFloat(240, 300))
-          --pos.y + r*math.sin to point downward across the path
-          --r*math.sin(anglerad) is negative
-          local castpos = Vector(pos.x + r*math.cos(anglerad), pos.y + r*math.sin(anglerad), pos.z)
-          unit:CastAbilityOnPosition(castpos, abil, -1)
-          return 7
-        else
-          local anglerad = math.rad(RandomFloat(60, 120))
-          --pos.y + r*math.sin to point upward across the path
-          local castpos = Vector(pos.x + r*math.cos(anglerad), pos.y + r*math.sin(anglerad), pos.z)
-          unit:CastAbilityOnPosition(castpos, abil, -1)
-          return 8
-        end
-      --last ones
-      else
-        --left or right side
-        --can go a little more right than earthshaker because there's room
-        if unit.orientation == "left" then
-          --calculates in circles
-          local anglerad = math.rad(RandomFloat(225, 280))
-          --pos.y + r*math.sin to point downward across the path
-          local castpos = Vector(pos.x + r*math.cos(anglerad), pos.y + r*math.sin(anglerad), pos.z)
-          unit:CastAbilityOnPosition(castpos, abil, -1)
-          return 7
-        else
-          local anglerad = math.rad(RandomFloat(70, 135))
-          --pos.y + r*math.sin to point upward across the path
-          local castpos = Vector(pos.x + r*math.cos(anglerad), pos.y + r*math.sin(anglerad), pos.z)
-          unit:CastAbilityOnPosition(castpos, abil, -1)
-          return 9
-        end
-      end
-    else
-      return
-    end
-  end)
-end]]
 
 function GameMode:MiranaThinker(unit)
   local abil = unit:FindAbilityByName("mirana_arrow_custom")
@@ -919,28 +841,6 @@ function GameMode:TouchMeThinker(unit)
   end
 end
 
---[[function GameMode:InvokerThinker(unit)
-  local abil = unit:FindAbilityByName("sun_strike_custom")
-  math.randomseed(GameRules:GetGameTime())
-  --local randomNumber = math.random(1, 3)
-  --random float of x between top left and top right
-  --random float of y between top left and bottom left
-  local topLeftEnt = Entities:FindByName(nil, "sun_strike_entity_top_left")
-  local topLeftVector = topLeftEnt:GetAbsOrigin()
-  local topRightEnt = Entities:FindByName(nil, "sun_strike_entity_top_right")
-  local topRightVector = topRightEnt:GetAbsOrigin()
-  local bottomLeftEnt = Entities:FindByName(nil, "sun_strike_entity_bottom_left")
-  local bottomLeftVector = bottomLeftEnt:GetAbsOrigin()
-  local castPos = Vector(RandomFloat(topLeftVector.x, topRightVector.x), RandomFloat(bottomLeftVector.y, topLeftVector.y), 128)
-  --test
-  --local castPos = topLeftEnt:GetAbsOrigin()
-  print(tostring(castPos))
-  print(tostring(abil:GetAbilityName()))
-  unit:CastAbilityOnPosition(castPos, abil, -1)
-  return 1
-end]]
-
-
 --This function is the thinker for the feed me! creep
 function GameMode:FeedMeThinker(unit)
   if (not PlayerResource:GetSelectedHeroEntity(unit:GetMainControllingPlayer()):IsAlive()) then
@@ -1000,29 +900,6 @@ function GameMode:LinaThinker(unit)
     return nil
   end
 end
-
-
---[[function GameMode:LinaThinker(unit)
-  local abil = unit:FindAbilityByName("lina_light_strike_array_custom")
-  math.randomseed(GameRules:GetGameTime())
-  --local randomNumber = math.random(1, 3)
-  --random float of x between top left and top right
-  --random float of y between top left and bottom left
-  local topLeftEnt = Entities:FindByName(nil, "sun_strike_entity_top_left")
-  local topLeftVector = topLeftEnt:GetAbsOrigin()
-  local topRightEnt = Entities:FindByName(nil, "sun_strike_entity_top_right")
-  local topRightVector = topRightEnt:GetAbsOrigin()
-  local bottomLeftEnt = Entities:FindByName(nil, "sun_strike_entity_bottom_left")
-  local bottomLeftVector = bottomLeftEnt:GetAbsOrigin()
-  local castPos = Vector(RandomFloat(topLeftVector.x, topRightVector.x), RandomFloat(bottomLeftVector.y, topLeftVector.y), 128)
-  --test
-  --local castPos = topLeftEnt:GetAbsOrigin()
-  print(tostring(castPos))
-  print(tostring(abil:GetAbilityName()))
-  unit:CastAbilityOnPosition(castPos, abil, -1)
-  return 1
-end]]
-
 
 function GameMode:UltCreepThinker(unit)
   if not GameMode.zone8Active then

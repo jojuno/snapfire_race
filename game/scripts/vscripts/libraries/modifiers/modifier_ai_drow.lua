@@ -3,7 +3,7 @@ modifier_ai_drow = class({})
 local AI_STATE_IDLE = 0
 local AI_STATE_AGGRESSIVE = 1
 
-local AI_THINK_INTERVAL = 0.5
+local AI_THINK_INTERVAL = 0.1
 
 function modifier_ai_drow:OnCreated(params)
     if IsServer() then 
@@ -37,11 +37,9 @@ end
 
 function modifier_ai_drow:AggressiveThink()
     if (self.unit:GetAbsOrigin() - self.aggroTarget:GetAbsOrigin()):Length() > self.aggroRange then
-        --self.unit:MoveToPosition(self.spawnPos)
         self.state = AI_STATE_IDLE
         return
     elseif not self.aggroTarget:IsAlive() then
-        --self.unit:MovetoPosition(self.spawnPos)
         self.state = AI_STATE_IDLE
         return
     end
