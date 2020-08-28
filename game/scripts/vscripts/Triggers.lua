@@ -1,19 +1,5 @@
 require('libraries/notifications')
 
---causes issues where players are not killed if the entity is triggered by multiple players at the same time
---may need it because of killing players twice
---[[function LavaTrigger(trigger)
-        local ent = trigger.activator
-        if not ent:IsHero() then
-            ent:ForceKill(true)
-        end
-
-        if not ent then return end
-        ent:ForceKill(true)
-
-    return 0.1
-end]]
-
 function Checkpoint1Trigger(trigger)
     local ent = trigger.activator
     if not ent then return end
