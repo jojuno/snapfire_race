@@ -362,25 +362,31 @@ end
 
 function CheckpointFinishTrigger(trigger)
     local ent = trigger.activator
+    if not ent then return end 
 
-    local numTriggered = 0
+    --local numTriggered = 0
+
+    
+    GameRules:SetCustomVictoryMessage(string.format("%s WINS!", tostring(PlayerResource:GetPlayerName(ent:GetPlayerID()))))
+    GameRules:SetGameWinner(ent:GetTeam())
+    GameRules:SetSafeToLeave(true)
     
     --player finished the lap
-    if not GameMode.playerEnts[ent:GetPlayerID()]["zoneTriggered"]["endzone"] then
-        GameMode.playerEnts[ent:GetPlayerID()]["zoneTriggered"]["endzone"] = true
+    --if not GameMode.playerEnts[ent:GetPlayerID()]["zoneTriggered"]["endzone"] then
+    --    GameMode.playerEnts[ent:GetPlayerID()]["zoneTriggered"]["endzone"] = true
         --check how many people finished the lap
-        for playerID, player in ipairs(GameMode.playerEnts), GameMode.playerEnts, -1 do
-            if player["zoneTriggered"]["endzone"] == false then goto continue
-            else
-                numTriggered = numTriggered + 1
-            end
-            ::continue::
-        end
-        GameMode.playerEnts[ent:GetPlayerID()]["laps"][GameMode.playerEnts[ent:GetPlayerID()]["currentLap"]]["finished"] = true
-        GameMode.playerEnts[ent:GetPlayerID()]["laps"][GameMode.playerEnts[ent:GetPlayerID()]["currentLap"]]["place"] = numTriggered
-        Notifications:Bottom(ent:GetPlayerID(), {text="Finished!", duration = 5, style={color="red"}})
-        Notifications:Bottom(ent:GetPlayerID(), {text=string.format("You ranked %s", numTriggered), duration = 5})
-    end
+    --    for playerID, player in ipairs(GameMode.playerEnts), GameMode.playerEnts, -1 do
+    --        if player["zoneTriggered"]["endzone"] == false then goto continue
+    --        else
+    --            numTriggered = numTriggered + 1
+    --        end
+    --        ::continue::
+    --    end
+    --    GameMode.playerEnts[ent:GetPlayerID()]["laps"][GameMode.playerEnts[ent:GetPlayerID()]["currentLap"]]["finished"] = true
+    --    GameMode.playerEnts[ent:GetPlayerID()]["laps"][GameMode.playerEnts[ent:GetPlayerID()]["currentLap"]]["place"] = numTriggered
+    --    Notifications:Bottom(ent:GetPlayerID(), {text="Finished!", duration = 5, style={color="red"}})
+    --    Notifications:Bottom(ent:GetPlayerID(), {text=string.format("You ranked %s", numTriggered), duration = 5})
+    --end
     
 
     --for future version
@@ -388,13 +394,13 @@ function CheckpointFinishTrigger(trigger)
     --ent:AddNewModifier(nil, nil, "modifier_invulnerable", {})
 
     --if everyone finished
-    if numTriggered == GameMode.numPlayers and GameMode.zone8Active then
+    --if numTriggered == GameMode.numPlayers and GameMode.zone8Active then
         --kill ult creeps
-        for spawn_loc_name, ult_creep in pairs(GameMode.spawns[8]["ult_creeps"]) do
-            ult_creep:ForceKill(false)
-            ult_creep.active = false
-        end
-        GameMode.zone8Active = false
+        --for spawn_loc_name, ult_creep in pairs(GameMode.spawns[8]["ult_creeps"]) do
+        --    ult_creep:ForceKill(false)
+        --    ult_creep.active = false
+        --end
+        --GameMode.zone8Active = false
 
         --for future version
         --countdown seconds
@@ -437,17 +443,17 @@ function CheckpointFinishTrigger(trigger)
         --GameMode.currentLap = GameMode.currentLap + 1
 
         --for version 4
-        local winner = nil
-        for playerID, player in ipairs(GameMode.playerEnts), GameMode.playerEnts, -1 do
+        --local winner = nil
+        --for playerID, player in ipairs(GameMode.playerEnts), GameMode.playerEnts, -1 do
             --assign score
-            player["score"] = player["score"] + GameMode.scoreChart[player["laps"][player["currentLap"]]["place"]]
-            if player["score"] == 10 then        
-                winner = player["hero"]
-            end
-        end
-        GameRules:SetCustomVictoryMessage(string.format("%s WINS!", tostring(PlayerResource:GetPlayerName(winner:GetPlayerID()))))
-        GameRules:SetGameWinner(winner:GetTeam())
-        GameRules:SetSafeToLeave(true)
-    end
+        --    player["score"] = player["score"] + GameMode.scoreChart[player["laps"][player["currentLap"]]["place"]]
+        --    if player["score"] == 10 then        
+        --        winner = player["hero"]
+        --    end
+       -- end
+        --GameRules:SetCustomVictoryMessage(string.format("%s WINS!", tostring(PlayerResource:GetPlayerName(winner:GetPlayerID()))))
+        --GameRules:SetGameWinner(winner:GetTeam())
+        --GameRules:SetSafeToLeave(true)]]
+    --end
 end
 
