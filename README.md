@@ -30,4 +30,4 @@ Version 1 7/25/2020
 - fight each other
 - fight creeps
 
-thank you to modDota, terkeroo, and barebones.
+Thank you to modDota, terkeroo, barebones, PohkaDev, Baumi, and the reddit Dota2 community.
