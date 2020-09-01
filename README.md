@@ -1,6 +1,6 @@
 # Snapfire Race
 
-![Poster](https://github.com/jojuno/snapfire_race/blob/master/loading%20screen%20version%204%20instructions.jpg)
+![Poster](https://github.com/jojuno/snapfire_race/blob/master/loading_screen.png)
 
 Race your Snapfire to the finish! Who will win?
 
