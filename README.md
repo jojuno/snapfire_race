@@ -4,6 +4,8 @@
 
 Race your Snapfire to the finish! Who will win?
 
+Join the reddit discussion: https://www.reddit.com/r/DotA2/comments/ihzufg/my_racing_custom_game_snapfire_race_kinda_like/
+
 Version 2 has been released!
 8/1/2020
 - You can feed cookies to opponents
